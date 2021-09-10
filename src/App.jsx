@@ -1,10 +1,10 @@
 import './App.css';
+import ExpAdd from './components/expenses/ExpAdd';
 
 function App() {
   return (
     <div>
-      <p>Hello from App!
-      </p>
+      <ExpAdd />
     </div>
   );
 }

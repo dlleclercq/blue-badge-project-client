@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { makeStyles } from '@material-ui/core/styles';
+
 // drop down list imports
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -17,23 +19,36 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 
-// import for checkbox
-import Checkbox from "@material-ui/core/Checkbox";
-
 // import for button
 import Button from "@material-ui/core/Button";
+import { FormControl } from "@material-ui/core";
+import { CallMissedSharp } from "@material-ui/icons";
+
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 const ExpAdd = (props) => {
+
+  const classes = useStyles();
+
   // declare useState variables to submit via sequelize
   const [category, setCategory] = useState("");
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [dueDate, setDueDate] = useState("");
-  const [reoccuring, setReoccuring] = React.useState(true);
+  const [reoccuring, setReoccuring] = React.useState(false);
 
   // update state variables with data from inputs
   let updateCategory = (e) => {
     setCategory(e.target.value);
+    console.log("Update Cat fired");
     console.log(category);
   };
 
@@ -53,7 +68,7 @@ const ExpAdd = (props) => {
   };
 
   let updateReoccuring = (e) => {
-    setReoccuring(e.target.checked);
+    setReoccuring(e.target.value);
     console.log("recurring payment:", reoccuring);
   };
 
@@ -85,8 +100,8 @@ const ExpAdd = (props) => {
   return (
     <form>
       {/* category dropdown list */}
-      {/* <FormControl className={classes.margin}> */}
-      <InputLabel id="ddlExpCat">Expense Category</InputLabel>
+      <FormControl className={classes.formControl}>
+      <InputLabel id="ddlExpCat">Category</InputLabel>
       <Select
         labelId="ddlExpCat"
         id="ddlExpCat"
@@ -107,8 +122,8 @@ const ExpAdd = (props) => {
         <MenuItem value={"Beauty"}>Beauty</MenuItem>
         <MenuItem value={"Other"}>Other</MenuItem>
       </Select>
+      </FormControl>
       <br />
-      {/* </FormControl> */}
 
       {/* vendor name input */}
       <TextField
@@ -146,14 +161,22 @@ const ExpAdd = (props) => {
       </MuiPickersUtilsProvider>
       <br />
 
-      {/* Recurring checkbox  */}
-      <label htmlFor="ckboxReoccuring">Check for recurring expesse</label>
-      <Checkbox
-        id="ckboxReoccuring"
-        checked={true}
+      {/* Recurring payment dropdown list  */}
+      <FormControl className={classes.formControl}>
+      <InputLabel id="ddlExpRec">Frequency</InputLabel>
+      <Select
+        labelId="ddlExpRec"
+        id="ddlExpRec"
+        value={reoccuring}
         onChange={updateReoccuring}
-        inputProps={{ "aria-label": "primary checkbox" }}
-      />
+      >
+        <MenuItem value="">
+          <em>None</em>
+        </MenuItem>
+        <MenuItem value={true}>Recurring</MenuItem>
+        <MenuItem value={false}>Non-Recurring</MenuItem>
+      </Select>
+      </FormControl>
       <br />
 
       <Button variant="contained" onClick={addExpense}>

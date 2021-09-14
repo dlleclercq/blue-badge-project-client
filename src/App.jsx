@@ -1,6 +1,8 @@
-// import "./App.css";
+import './App.css';
+import ExpAdd from './components/expenses/ExpAdd';
 import React, { useState, useEffect } from "react";
 import Auth from "./components/auth/Auth";
+
 function App() {
   const [sessionToken, setSessionToken] = useState("");
 
@@ -24,6 +26,7 @@ function App() {
   return (
     <div>
       <Auth updateToken={updateToken} />
+      <ExpAdd />      
     </div>
   );
 }

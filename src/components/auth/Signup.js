@@ -37,7 +37,6 @@ const Signup = (props) => {
       .then((data) => {
         props.updateToken(data.sessionToken);
       });
-    console.log(email, password);
   };
 
   return (
@@ -85,7 +84,7 @@ const Signup = (props) => {
             <Button onClick={handleClose} color="primary">
               Cancel
             </Button>
-            <Button type="submit" color="primary">
+            <Button onClick={handleClose} type="submit" color="primary">
               Signup
             </Button>
           </form>

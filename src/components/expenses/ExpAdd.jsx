@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { makeStyles } from "@material-ui/core/styles";
+
 // drop down list imports
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -37,8 +39,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ExpAdd = (props) => {
-
-  // let token = props.token
 
   const classes = useStyles();
 
@@ -177,6 +177,7 @@ const ExpAdd = (props) => {
         <Grid xs={6}>
         {/* Recurring payment dropdown list  */}
         <FormControl className={classes.formControl}>
+
         <InputLabel id="ddlExpRec">Frequency</InputLabel>
         <Select
           labelId="ddlExpRec"

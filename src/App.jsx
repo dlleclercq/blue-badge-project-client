@@ -1,5 +1,5 @@
-import './App.css';
-import ExpAdd from './components/expenses/ExpAdd';
+import "./App.css";
+import ExpAdd from "./components/expenses/ExpAdd";
 import React, { useState, useEffect } from "react";
 import Auth from "./components/auth/Auth";
 import { PinDropSharp } from '@material-ui/icons';
@@ -28,6 +28,7 @@ function App() {
     <div>
       <Auth updateToken={updateToken} />
       <ExpAdd token={sessionToken} />      
+
     </div>
   );
 }

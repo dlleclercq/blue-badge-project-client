@@ -1,5 +1,5 @@
-import './App.css';
-import ExpAdd from './components/expenses/ExpAdd';
+import "./App.css";
+import ExpAdd from "./components/expenses/ExpAdd";
 import React, { useState, useEffect } from "react";
 import Auth from "./components/auth/Auth";
 
@@ -26,7 +26,7 @@ function App() {
   return (
     <div>
       <Auth updateToken={updateToken} />
-      <ExpAdd />      
+      <ExpAdd token={sessionToken} />
     </div>
   );
 }

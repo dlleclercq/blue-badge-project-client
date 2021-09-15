@@ -37,7 +37,6 @@ const Login = (props) => {
       .then((data) => {
         props.updateToken(data.sessionToken);
       });
-    console.log(email, password);
   };
 
   return (
@@ -86,7 +85,7 @@ const Login = (props) => {
             <Button onClick={handleClose} color="primary">
               Cancel
             </Button>
-            <Button type="submit" color="primary">
+            <Button onClick={handleClose} type="submit" color="primary">
               Login
             </Button>
           </form>

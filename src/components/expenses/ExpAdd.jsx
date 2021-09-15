@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
 // drop down list imports
 import InputLabel from "@material-ui/core/InputLabel";
@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ExpAdd = (props) => {
-
   const classes = useStyles();
 
   // declare useState variables to submit via sequelize
@@ -78,7 +77,7 @@ const ExpAdd = (props) => {
     fetch("http://localhost:3000/expense/add", {
       method: "POST",
       body: JSON.stringify({
-        expenseAdd: {
+        expense: {
           category: category,
           name: name,
           amount: amount,
@@ -101,27 +100,27 @@ const ExpAdd = (props) => {
     <form>
       {/* category dropdown list */}
       <FormControl className={classes.formControl}>
-      <InputLabel id="ddlExpCat">Category</InputLabel>
-      <Select
-        labelId="ddlExpCat"
-        id="ddlExpCat"
-        value={category}
-        onChange={updateCategory}
-        //   input={<BootstrapInput />}
-      >
-        <MenuItem value="">
-          <em>None</em>
-        </MenuItem>
-        <MenuItem value={"Restaurant"}>Restaurant</MenuItem>
-        <MenuItem value={"Food"}>Food</MenuItem>
-        <MenuItem value={"Electric"}>Electric</MenuItem>
-        <MenuItem value={"Gas"}>Gas</MenuItem>
-        <MenuItem value={"Water"}>Water</MenuItem>
-        <MenuItem value={"Childcare"}>Childcare</MenuItem>
-        <MenuItem value={"Health"}>Health</MenuItem>
-        <MenuItem value={"Beauty"}>Beauty</MenuItem>
-        <MenuItem value={"Other"}>Other</MenuItem>
-      </Select>
+        <InputLabel id="ddlExpCat">Category</InputLabel>
+        <Select
+          labelId="ddlExpCat"
+          id="ddlExpCat"
+          value={category}
+          onChange={updateCategory}
+          //   input={<BootstrapInput />}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={"Restaurant"}>Restaurant</MenuItem>
+          <MenuItem value={"Food"}>Food</MenuItem>
+          <MenuItem value={"Electric"}>Electric</MenuItem>
+          <MenuItem value={"Gas"}>Gas</MenuItem>
+          <MenuItem value={"Water"}>Water</MenuItem>
+          <MenuItem value={"Childcare"}>Childcare</MenuItem>
+          <MenuItem value={"Health"}>Health</MenuItem>
+          <MenuItem value={"Beauty"}>Beauty</MenuItem>
+          <MenuItem value={"Other"}>Other</MenuItem>
+        </Select>
       </FormControl>
       <br />
 
@@ -163,19 +162,19 @@ const ExpAdd = (props) => {
 
       {/* Recurring payment dropdown list  */}
       <FormControl className={classes.formControl}>
-      <InputLabel id="ddlExpRec">Frequency</InputLabel>
-      <Select
-        labelId="ddlExpRec"
-        id="ddlExpRec"
-        value={reoccuring}
-        onChange={updateReoccuring}
-      >
-        <MenuItem value="">
-          <em>None</em>
-        </MenuItem>
-        <MenuItem value={true}>Recurring</MenuItem>
-        <MenuItem value={false}>Non-Recurring</MenuItem>
-      </Select>
+        <InputLabel id="ddlExpRec">Frequency</InputLabel>
+        <Select
+          labelId="ddlExpRec"
+          id="ddlExpRec"
+          value={reoccuring}
+          onChange={updateReoccuring}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={true}>Recurring</MenuItem>
+          <MenuItem value={false}>Non-Recurring</MenuItem>
+        </Select>
       </FormControl>
       <br />
 

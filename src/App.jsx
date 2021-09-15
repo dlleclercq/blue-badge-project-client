@@ -2,6 +2,7 @@ import "./App.css";
 import ExpAdd from "./components/expenses/ExpAdd";
 import React, { useState, useEffect } from "react";
 import Auth from "./components/auth/Auth";
+import { PinDropSharp } from '@material-ui/icons';
 
 function App() {
   const [sessionToken, setSessionToken] = useState("");
@@ -26,7 +27,8 @@ function App() {
   return (
     <div>
       <Auth updateToken={updateToken} />
-      <ExpAdd token={sessionToken} />
+      <ExpAdd token={sessionToken} />      
+
     </div>
   );
 }

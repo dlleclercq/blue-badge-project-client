@@ -1,8 +1,8 @@
 import "./App.css";
-import ExpAdd from "./components/expenses/ExpAdd";
 import React, { useState, useEffect } from "react";
 import Auth from "./components/auth/Auth";
-import { PinDropSharp } from '@material-ui/icons';
+// import { PinDropSharp } from '@material-ui/icons';
+import ExpSplash from "./components/expenses/ExpSplash";
 
 function App() {
   const [sessionToken, setSessionToken] = useState("");
@@ -26,9 +26,8 @@ function App() {
 
   return (
     <div>
-      <Auth updateToken={updateToken} />
-      <ExpAdd token={sessionToken} />      
-
+      <Auth updateToken={updateToken} />     
+      <ExpSplash token={sessionToken} />
     </div>
   );
 }

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 // drop down list imports
@@ -21,12 +20,27 @@ import {
 // import for button
 import Button from "@material-ui/core/Button";
 import { FormControl } from "@material-ui/core";
-import { CallMissedSharp } from "@material-ui/icons";
 
-// layout imports 
-import Grid from "@material-ui/core/Grid";
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
+// layout imports
+import { Grid } from "@material-ui/core";
+
+// modal imports
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+
+// style for modal
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -39,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ExpAdd = (props) => {
-
   const classes = useStyles();
 
   // declare useState variables to submit via sequelize
@@ -49,37 +62,50 @@ const ExpAdd = (props) => {
   const [dueDate, setDueDate] = useState("");
   const [reoccuring, setReoccuring] = React.useState(false);
 
+  // function to clear values after fetch
+  const clearForm = () => {
+    // reset state variables
+    setCategory("");
+    setName("");
+    setAmount("");
+    setDueDate("");
+    setReoccuring(false);
+    
+    // reset input on form
+
+  }
+
+  // modal variables
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   // update state variables with data from inputs
   let updateCategory = (e) => {
     setCategory(e.target.value);
-    console.log("Update Cat fired");
-    console.log(category);
   };
 
   let updateName = (e) => {
     setName(e.target.value);
-    console.log("vendor name:", name);
   };
 
   let updateAmount = (e) => {
     setAmount(e.target.value);
-    console.log("amount: ", amount);
   };
 
   let updateDueDate = (date) => {
     setDueDate(date);
-    console.log("due date:", dueDate);
   };
 
   let updateReoccuring = (e) => {
     setReoccuring(e.target.value);
-    console.log("recurring payment:", reoccuring);
   };
 
-  // fetch to submit infor to database
+  // fetch to submit info to database
   let addExpense = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3000/expense/add", {
+
+    fetch(`http://localhost:3000/expense/add`, {
       method: "POST",
       body: JSON.stringify({
         expense: {
@@ -96,109 +122,146 @@ const ExpAdd = (props) => {
       }),
     })
       .then((res) => res.json())
-      .then((expenseData) => {
-        console.log("Expense Data:", expenseData);
-      });
+      .then((handleOpen())
+      );
   };
 
   return (
-    <Grid container spacing={3}>
-      <form>
-        <Grid xs={12}>
-          <h1>Add Expenses</h1>
-        </Grid>
-        
-        <Grid xs={6}>
-          {/* category dropdown list */}
-          <FormControl className={classes.formControl}>
-          <InputLabel id="ddlExpCat">Category</InputLabel>
-          <Select
-            labelId="ddlExpCat"
-            id="ddlExpCat"
-            value={category}
-            onChange={updateCategory}
-            //   input={<BootstrapInput />}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={"Restaurant"}>Restaurant</MenuItem>
-            <MenuItem value={"Food"}>Food</MenuItem>
-            <MenuItem value={"Electric"}>Electric</MenuItem>
-            <MenuItem value={"Gas"}>Gas</MenuItem>
-            <MenuItem value={"Water"}>Water</MenuItem>
-            <MenuItem value={"Childcare"}>Childcare</MenuItem>
-            <MenuItem value={"Health"}>Health</MenuItem>
-            <MenuItem value={"Beauty"}>Beauty</MenuItem>
-            <MenuItem value={"Other"}>Other</MenuItem>
-          </Select>
-          </FormControl>
-        </Grid>
+    <form>
+      <Grid container direction="column">
+        <Grid item container>
+          <Grid item xs={2} />
+          <Grid item xs={8}>
+            {/* category dropdown list */}
+            <Grid item xs={6}>
+              <FormControl className={classes.formControl}>
+                <InputLabel id="ddlExpCat">Category</InputLabel>
+                <Select
+                  labelId="ddlExpCat"
+                  id="ddlExpCat"
+                  value={category}
+                  onChange={updateCategory}
+                  //   input={<BootstrapInput />}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={"Restaurant"}>Restaurant</MenuItem>
+                  <MenuItem value={"Food"}>Food</MenuItem>
+                  <MenuItem value={"Electric"}>Electric</MenuItem>
+                  <MenuItem value={"Gas"}>Gas</MenuItem>
+                  <MenuItem value={"Water"}>Water</MenuItem>
+                  <MenuItem value={"Childcare"}>Childcare</MenuItem>
+                  <MenuItem value={"Health"}>Health</MenuItem>
+                  <MenuItem value={"Beauty"}>Beauty</MenuItem>
+                  <MenuItem value={"Other"}>Other</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
 
-        <Grid xs={6}>
-        {/* vendor name input */}
-          <TextField
-            id="txtName"
-            label="Vendor Name"
-            variant="outlined"
-            onChange={updateName}
-          />
+            {/* vendor name input */}
+            <Grid item xs={6}>
+              <TextField
+                id="txtName"
+                label="Payee"
+                variant="outlined"
+                required="true"
+                error="true"
+                onChange={updateName}
+              />
+            </Grid>
+
+            {/* amount input */}
+            <Grid item xs={6}>
+              <TextField
+                id="txtAmount"
+                label="Amount"
+                variant="outlined"
+                onChange={updateAmount}
+              />
+            </Grid>
+
+            {/* due date - date picker field */}
+            <Grid item xs={6}>
+              <label htmlFor="dpDueDate">Due Date</label>
+              <br />
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  margin="normal"
+                  id="dpDueDate"
+                  // label="Due Date"
+                  format="MM/dd/yyyy"
+                  value={dueDate}
+                  onChange={updateDueDate}
+                  KeyboardButtonProps={{
+                    "aria-label": "change date",
+                  }}
+                />
+              </MuiPickersUtilsProvider>
+            </Grid>
+
+            {/* Recurring payment dropdown list  */}
+            <Grid item xs={6}>
+              <FormControl className={classes.formControl}>
+                <InputLabel id="ddlExpRec">Frequency</InputLabel>
+                <Select
+                  labelId="ddlExpRec"
+                  id="ddlExpRec"
+                  value={reoccuring}
+                  onChange={updateReoccuring}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={true}>Recurring</MenuItem>
+                  <MenuItem value={false}>Non-Recurring</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+
+            {/* Buttons */}
+            <Grid item xs={12}>
+              <Button variant="contained" onClick={addExpense}>
+                Add
+              </Button>
+            </Grid>
+
+            {/* Submit confirmation */}
+            <Grid item xs={12}>
+              <div>
+                {/* <Button onClick={handleOpen}>Open modal</Button> */}
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={style}>
+                    <Typography
+                      id="modal-modal-title"
+                      variant="h6"
+                      component="h2"
+                    >
+                      Expense Submitted!
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      <div id="textAreaConf">
+                        <h4>Category: {category}</h4>
+                        <h4>Payee: {name}</h4>
+                        <h4>Amount: {amount}</h4>
+                        <h4>Due Date: {toString({dueDate})}</h4>
+                        <h4>Frequency: {toString(reoccuring)}</h4>
+                      </div>
+                    </Typography>
+                  </Box>
+                </Modal>
+              </div>
+            </Grid>
+          </Grid>
+          <Grid item xs={2} />
         </Grid>
-
-        <Grid xs={6}>
-          {/* amountj input */}
-          <TextField
-            id="txtAmount"
-            label="Payment Amount"
-            variant="outlined"
-            onChange={updateAmount}
-          />
-        </Grid>
-
-        <Grid xs={6}>
-          {/* due date - date picker field */}
-          <label htmlFor="dpDueDate">Due Date</label>
-          <br />
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
-              margin="normal"
-              id="dpDueDate"
-              // label="Due Date"
-              format="MM/dd/yyyy"
-              value={dueDate}
-              onChange={updateDueDate}
-              KeyboardButtonProps={{
-                "aria-label": "change date",
-              }}
-            />
-          </MuiPickersUtilsProvider>
-        </Grid>
-
-        <Grid xs={6}>
-        {/* Recurring payment dropdown list  */}
-        <FormControl className={classes.formControl}>
-
-        <InputLabel id="ddlExpRec">Frequency</InputLabel>
-        <Select
-          labelId="ddlExpRec"
-          id="ddlExpRec"
-          value={reoccuring}
-          onChange={updateReoccuring}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={true}>Recurring</MenuItem>
-          <MenuItem value={false}>Non-Recurring</MenuItem>
-        </Select>
-        </FormControl>
-        </Grid>
-
-        <Button variant="contained" onClick={addExpense}>
-          Add Expense
-        </Button>
-      </form>
-    </Grid>
+      </Grid>
+    </form>
   );
 };
 

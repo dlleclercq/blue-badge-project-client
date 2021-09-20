@@ -3,7 +3,7 @@ import { ThemeProvider, createTheme } from "@material-ui/core";
 import Auth from "./components/auth/Auth";
 import Landing from "./components/landing/Landing";
 import ExpAdd from "./components/expenses/ExpAdd";
-import ExpAdd2 from "./components/expenses/ExpAdd2";
+// import ExpAdd2 from "./components/expenses/ExpAdd2";
 import Chart from "./components/chart/Chart";
 import "./App.css";
 

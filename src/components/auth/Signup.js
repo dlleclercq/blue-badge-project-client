@@ -41,7 +41,7 @@ const Signup = (props) => {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button variant="contained" color="secondary" onClick={handleClickOpen}>
         Signup
       </Button>
       <Dialog
@@ -51,7 +51,7 @@ const Signup = (props) => {
       >
         <DialogTitle id="form-dialog-title">Signup</DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText color="primary">
             To join iSpend, please enter the following:
           </DialogContentText>
 

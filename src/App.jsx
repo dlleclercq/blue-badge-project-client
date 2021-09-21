@@ -2,6 +2,9 @@ import './App.css';
 import ExpAdd from './components/expenses/ExpAdd';
 import React, { useState, useEffect } from "react";
 import Auth from "./components/auth/Auth";
+import ButtonAppBar from "./components/Navs/LandingNav";
+import ButtonAppBarA from "./components/Navs/HomeNav";
+import EnhancedTable from './components/ViewAll/ViewAll';
 
 function App() {
   const [sessionToken, setSessionToken] = useState("");
@@ -25,8 +28,7 @@ function App() {
 
   return (
     <div>
-      <Auth updateToken={updateToken} />
-      <ExpAdd />      
+      <EnhancedTable />
     </div>
   );
 }

@@ -22,7 +22,7 @@ const Landing = () => {
     <div className={classes.root}>
       <Paper elevation={0}>
         <img
-          src="/assets/graph3-1.jpg"
+          src="/assets/image03-1.jpg"
           alt="bar graph"
           width="400px"
           height="600 px"
@@ -31,7 +31,7 @@ const Landing = () => {
 
       <Paper elevation={0}>
         <img
-          src="/assets/graph3-2.jpg"
+          src="/assets/image03-2.jpg"
           alt="bar graph"
           width="400px"
           height="600 px"
@@ -40,7 +40,7 @@ const Landing = () => {
 
       <Paper elevation={0}>
         <img
-          src="/assets/graph3-3.jpg"
+          src="/assets/image03-3.jpg"
           alt="bar graph"
           width="400px"
           height="600 px"

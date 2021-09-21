@@ -22,7 +22,8 @@ const Chart = () => {
               label: "Totals",
               data: [12, 40, 85, 36, 21, 77, 92, 76, 39],
               options: {
-                responsive: true,
+                animation: true,
+                // responsive: true,
                 plugins: {
                   legend: {
                     position: "right",
@@ -33,6 +34,8 @@ const Chart = () => {
                   },
                 },
               },
+              borderColor: ["#020202"],
+
               backgroundColor: [
                 "rgba(157, 2, 8)",
                 "rgba(0, 0, 188)",

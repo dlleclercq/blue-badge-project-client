@@ -125,12 +125,29 @@ const ExpAdd = (props) => {
       }),
     })
       .then((res) => res.json())
-      .then((handleOpen())
-      );
+      ;
   };
+
+  
 
   return (
     <form>
+
+{/* <TextField
+                        className={classes.year}
+                        select
+                        required={true}
+                        label="Condition"
+                        // value={currency}
+                        onChange={(e) => setCondition(e.target.value)}
+                        helperText="Please select Vehicle Condition"
+                      >
+                        <MenuItem value="">None</MenuItem>
+                        <MenuItem value={"New"}>New</MenuItem>
+                        <MenuItem value={"Used"}>Used Vehicle</MenuItem>
+                      </TextField> */}
+
+
       <Grid container direction="column">
         <Grid item container>
           <Grid item xs={2} />
@@ -144,6 +161,7 @@ const ExpAdd = (props) => {
                   id="ddlExpCat"
                   value={category}
                   onChange={updateCategory}
+                  required={true}
                   //   input={<BootstrapInput />}
                 >
                   <MenuItem value="">
@@ -168,8 +186,8 @@ const ExpAdd = (props) => {
                 id="txtName"
                 label="Payee"
                 variant="outlined"
-                required="true"
-                error="true"
+                required={true}
+
                 onChange={updateName}
               />
             </Grid>
@@ -180,6 +198,7 @@ const ExpAdd = (props) => {
                 id="txtAmount"
                 label="Amount"
                 variant="outlined"
+                required={true}
                 onChange={updateAmount}
               />
             </Grid>
@@ -211,6 +230,7 @@ const ExpAdd = (props) => {
                   labelId="ddlExpRec"
                   id="ddlExpRec"
                   value={reoccuring}
+                  required={true}
                   onChange={updateReoccuring}
                 >
                   <MenuItem value="">
@@ -229,10 +249,10 @@ const ExpAdd = (props) => {
               </Button>
             </Grid>
 
-            {/* Submit confirmation */}
+            {/* Submit confirmation
             <Grid item xs={12}>
               <div>
-                {/* <Button onClick={handleOpen}>Open modal</Button> */}
+                <Button onClick={handleOpen}>Open modal</Button>
                 <Modal
                   open={open}
                   onClose={handleClose}
@@ -259,7 +279,7 @@ const ExpAdd = (props) => {
                   </Box>
                 </Modal>
               </div>
-            </Grid>
+            </Grid> */}
           </Grid>
           <Grid item xs={2} />
         </Grid>

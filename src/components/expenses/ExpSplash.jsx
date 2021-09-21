@@ -64,8 +64,8 @@ const ExpSplash = (props) => {
             >
               <Toolbar />
               <Typography paragraph>
-                {/* <ExpAdd token={token} /> */}
-                <FormikAdd token={token} />
+                <ExpAdd token={token} />
+                {/* <FormikAdd token={token} /> */}
               </Typography>
               <Typography paragraph></Typography>
             </Box>

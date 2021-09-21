@@ -19,12 +19,7 @@ function App() {
     console.log(sessionToken);
   };
 
-  // const clearToken = () => {
-  //   localStorage.clear();
-  //   setSessionToken("");
-  // };
-
-  return (
+  return (    
     <div>
       <Auth updateToken={updateToken} />     
       <ExpSplash token={sessionToken} />

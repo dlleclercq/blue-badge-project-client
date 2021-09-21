@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
+import { Divider } from "@material-ui/core";
 
 // drop down list imports
 import InputLabel from "@material-ui/core/InputLabel";
@@ -139,6 +140,9 @@ const ExpAdd = (props) => {
             </FormControl>
           </Grid>
           <Grid item sm={9} />
+          <Divider />
+          <Divider />
+
           <Grid item sm={2} />
           <Grid item sm={1}>
             {/* Recurring payment dropdown list  */}
@@ -159,18 +163,20 @@ const ExpAdd = (props) => {
             </FormControl>
           </Grid>
           <Grid item sm={9} />
-
+          <Divider />
           <Grid item sm={2} />
           <Grid item sm={1}>
             {/* vendor name input */}
             <TextField
               id="txtName"
-              label="Vendor Name"
+              label="Vendor"
               variant="standard"
               onChange={updateName}
             />
           </Grid>
           <Grid item sm={9} />
+          <Divider />
+
           <Grid item sm={2} />
           <Grid item sm={1}>
             {/* amount input */}
@@ -182,16 +188,19 @@ const ExpAdd = (props) => {
             />
           </Grid>
           <Grid item sm={9} />
+          <Divider />
+
           <Grid item sm={2} />
           <Grid item sm={1}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
-                variant="inline"
+                variant="standard"
                 margin="normal"
                 id="dpDueDate"
                 format="MM/dd/yyyy"
                 label="Due Date"
                 helperText=""
+                clearable
                 value={dueDate}
                 onChange={updateDueDate}
                 KeyboardButtonProps={{
@@ -201,8 +210,11 @@ const ExpAdd = (props) => {
             </MuiPickersUtilsProvider>
           </Grid>
           <Grid item sm={9} />
+          <Divider />
+
           <Grid item sm={2} />
-          <Grid item sm={1}>
+          <Divider />
+          <Grid item sm={2}>
             <Button variant="contained" color="secondary" onClick={addExpense}>
               Add Expense
             </Button>

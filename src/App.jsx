@@ -6,8 +6,8 @@ import ButtonAppBarA from "./components/Navs/HomeNav";
 import EnhancedTable from './components/ViewAll/ViewAll';
 import Landing from "./components/landing/Landing";
 import ExpAdd from "./components/expenses/ExpAdd";
-// import ExpAdd2 from "./components/expenses/ExpAdd2";
 import Chart from "./components/chart/Chart";
+// import Upcoming from "./components/upcoming/Upcoming";
 import "./App.css";
 
 //teal = #6CCFF6
@@ -30,6 +30,7 @@ const customTheme = createTheme({
       main: "#757780",
     },
   },
+
   typography: {
     h1: { color: "#6CCFF6", fontWeight: "bold" },
     h2: { color: "#6CCFF6", fontWeight: "bold" },
@@ -39,6 +40,7 @@ const customTheme = createTheme({
     h6: { color: "#6CCFF6", fontWeight: "bold" },
     body1: { color: "#6CCFF6" },
   },
+
   overrides: {
     MuiDialog: {
       paper: {
@@ -51,6 +53,18 @@ const customTheme = createTheme({
         color: "#6CCFF6",
       },
       icon: {
+        color: "#6ccff6",
+      },
+    },
+    MuiInputBase: {
+      formControl: {
+        underline: {
+          color: "#6ccff6",
+        },
+      },
+    },
+    MuiInput: {
+      underline: {
         color: "#6ccff6",
       },
     },
@@ -83,8 +97,8 @@ function App() {
         <Auth updateToken={updateToken} />
         <Landing />
         <ExpAdd token={sessionToken} />
-        {/* {/* <ExpAdd2 token={sessionToken} /> */}
         <Chart />
+        {/* <Upcoming /> */}
       </ThemeProvider>
     </div>
   );

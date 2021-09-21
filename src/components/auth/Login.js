@@ -37,12 +37,11 @@ const Login = (props) => {
       .then((data) => {
         props.updateToken(data.sessionToken);
       });
-    console.log(email, password);
   };
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
         Login
       </Button>
       <Dialog
@@ -86,7 +85,7 @@ const Login = (props) => {
             <Button onClick={handleClose} color="primary">
               Cancel
             </Button>
-            <Button type="submit" color="primary">
+            <Button onClick={handleClose} type="submit" color="primary">
               Login
             </Button>
           </form>

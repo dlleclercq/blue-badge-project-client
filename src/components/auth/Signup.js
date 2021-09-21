@@ -37,12 +37,11 @@ const Signup = (props) => {
       .then((data) => {
         props.updateToken(data.sessionToken);
       });
-    console.log(email, password);
   };
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button variant="contained" color="secondary" onClick={handleClickOpen}>
         Signup
       </Button>
       <Dialog
@@ -52,7 +51,7 @@ const Signup = (props) => {
       >
         <DialogTitle id="form-dialog-title">Signup</DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText color="primary">
             To join iSpend, please enter the following:
           </DialogContentText>
 
@@ -85,7 +84,7 @@ const Signup = (props) => {
             <Button onClick={handleClose} color="primary">
               Cancel
             </Button>
-            <Button type="submit" color="primary">
+            <Button onClick={handleClose} type="submit" color="primary">
               Signup
             </Button>
           </form>

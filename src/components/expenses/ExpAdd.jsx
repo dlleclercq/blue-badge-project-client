@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { Divider } from "@material-ui/core";
 
 // drop down list imports
 import InputLabel from "@material-ui/core/InputLabel";
@@ -44,6 +45,7 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -132,156 +134,125 @@ const ExpAdd = (props) => {
 
   return (
     <form>
-
-{/* <TextField
-                        className={classes.year}
-                        select
-                        required={true}
-                        label="Condition"
-                        // value={currency}
-                        onChange={(e) => setCondition(e.target.value)}
-                        helperText="Please select Vehicle Condition"
-                      >
-                        <MenuItem value="">None</MenuItem>
-                        <MenuItem value={"New"}>New</MenuItem>
-                        <MenuItem value={"Used"}>Used Vehicle</MenuItem>
-                      </TextField> */}
-
-
-      <Grid container direction="column">
+      <h1
+        style={{ display: "flex", justifyContent: "center", color: "#6ccff6" }}
+      >
+        EXPENSES
+      </h1>
+      <Grid
+        container
+        spacing={3}
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+      >
         <Grid item container>
-          <Grid item xs={2} />
-          <Grid item xs={8}>
+          <Grid item sm={2} />
+          <Grid item sm={1}>
             {/* category dropdown list */}
-            <Grid item xs={6}>
-              <FormControl className={classes.formControl}>
-                <InputLabel id="ddlExpCat">Category</InputLabel>
-                <Select
-                  labelId="ddlExpCat"
-                  id="ddlExpCat"
-                  value={category}
-                  onChange={updateCategory}
-                  required={true}
-                  //   input={<BootstrapInput />}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={"Restaurant"}>Restaurant</MenuItem>
-                  <MenuItem value={"Food"}>Food</MenuItem>
-                  <MenuItem value={"Electric"}>Electric</MenuItem>
-                  <MenuItem value={"Gas"}>Gas</MenuItem>
-                  <MenuItem value={"Water"}>Water</MenuItem>
-                  <MenuItem value={"Childcare"}>Childcare</MenuItem>
-                  <MenuItem value={"Health"}>Health</MenuItem>
-                  <MenuItem value={"Beauty"}>Beauty</MenuItem>
-                  <MenuItem value={"Other"}>Other</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-
-            {/* vendor name input */}
-            <Grid item xs={6}>
-              <TextField
-                id="txtName"
-                label="Payee"
-                variant="outlined"
-                required={true}
-
-                onChange={updateName}
-              />
-            </Grid>
-
-            {/* amount input */}
-            <Grid item xs={6}>
-              <TextField
-                id="txtAmount"
-                label="Amount"
-                variant="outlined"
-                required={true}
-                onChange={updateAmount}
-              />
-            </Grid>
-
-            {/* due date - date picker field */}
-            <Grid item xs={6}>
-              <label htmlFor="dpDueDate">Due Date</label>
-              <br />
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <KeyboardDatePicker
-                  margin="normal"
-                  id="dpDueDate"
-                  // label="Due Date"
-                  format="MM/dd/yyyy"
-                  value={dueDate}
-                  onChange={updateDueDate}
-                  KeyboardButtonProps={{
-                    "aria-label": "change date",
-                  }}
-                />
-              </MuiPickersUtilsProvider>
-            </Grid>
-
-            {/* Recurring payment dropdown list  */}
-            <Grid item xs={6}>
-              <FormControl className={classes.formControl}>
-                <InputLabel id="ddlExpRec">Frequency</InputLabel>
-                <Select
-                  labelId="ddlExpRec"
-                  id="ddlExpRec"
-                  value={reoccuring}
-                  required={true}
-                  onChange={updateReoccuring}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={true}>Recurring</MenuItem>
-                  <MenuItem value={false}>Non-Recurring</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-
-            {/* Buttons */}
-            <Grid item xs={12}>
-              <Button variant="contained" onClick={addExpense}>
-                Add
-              </Button>
-            </Grid>
-
-            {/* Submit confirmation
-            <Grid item xs={12}>
-              <div>
-                <Button onClick={handleOpen}>Open modal</Button>
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description"
-                >
-                  <Box sx={style}>
-                    <Typography
-                      id="modal-modal-title"
-                      variant="h6"
-                      component="h2"
-                    >
-                      Expense Submitted!
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                      <div id="textAreaConf">
-                        <h4>Category: {category}</h4>
-                        <h4>Payee: {name}</h4>
-                        <h4>Amount: {amount}</h4>
-                        <h4>Due Date: {toString({dueDate})}</h4>
-                        <h4>Frequency: {toString(reoccuring)}</h4>
-                      </div>
-                    </Typography>
-                  </Box>
-                </Modal>
-              </div>
-            </Grid> */}
+            <FormControl className={classes.formControl}>
+              <InputLabel id="ddlExpCat">Category</InputLabel>
+              <Select
+                labelId="ddlExpCat"
+                id="ddlExpCat"
+                value={category}
+                onChange={updateCategory}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={"Restaurant"}>Restaurant</MenuItem>
+                <MenuItem value={"Food"}>Food</MenuItem>
+                <MenuItem value={"Electric"}>Electric</MenuItem>
+                <MenuItem value={"Gas"}>Gas</MenuItem>
+                <MenuItem value={"Water"}>Water</MenuItem>
+                <MenuItem value={"Childcare"}>Childcare</MenuItem>
+                <MenuItem value={"Health"}>Health</MenuItem>
+                <MenuItem value={"Beauty"}>Beauty</MenuItem>
+                <MenuItem value={"Other"}>Other</MenuItem>
+              </Select>
+            </FormControl>
           </Grid>
-          <Grid item xs={2} />
+          <Grid item sm={9} />
+          <Divider />
+          <Divider />
+
+          <Grid item sm={2} />
+          <Grid item sm={1}>
+            {/* Recurring payment dropdown list  */}
+            <FormControl className={classes.formControl}>
+              <InputLabel id="ddlExpRec">Frequency</InputLabel>
+              <Select
+                labelId="ddlExpRec"
+                id="ddlExpRec"
+                value={reoccuring}
+                onChange={updateReoccuring}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={true}>Recurring</MenuItem>
+                <MenuItem value={false}>Non-Recurring</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item sm={9} />
+          <Divider />
+          <Grid item sm={2} />
+          <Grid item sm={1}>
+            {/* vendor name input */}
+            <TextField
+              id="txtName"
+              label="Vendor"
+              variant="standard"
+              onChange={updateName}
+            />
+          </Grid>
+          <Grid item sm={9} />
+          <Divider />
+
+          <Grid item sm={2} />
+          <Grid item sm={1}>
+            {/* amount input */}
+            <TextField
+              id="txtAmount"
+              label="Payment Amount"
+              variant="standard"
+              onChange={updateAmount}
+            />
+          </Grid>
+          <Grid item sm={9} />
+          <Divider />
+
+          <Grid item sm={2} />
+          <Grid item sm={1}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                variant="standard"
+                margin="normal"
+                id="dpDueDate"
+                format="MM/dd/yyyy"
+                label="Due Date"
+                helperText=""
+                clearable
+                value={dueDate}
+                onChange={updateDueDate}
+                KeyboardButtonProps={{
+                  "aria-label": "change date",
+                }}
+              />
+            </MuiPickersUtilsProvider>
+          </Grid>
+          <Grid item sm={9} />
+          <Divider />
+
+          <Grid item sm={2} />
+          <Divider />
+          <Grid item sm={2}>
+            <Button variant="contained" color="secondary" onClick={addExpense}>
+              Add Expense
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
     </form>

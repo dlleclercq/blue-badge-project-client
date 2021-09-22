@@ -1,7 +1,10 @@
 import React from "react";
-
 import { makeStyles } from "@material-ui/core/styles";
+
 import { Card, CardMedia, CardContent, Paper } from "@material-ui/core";
+
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,7 +14,9 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(3),
       marginTop: theme.spacing(10),
       width: theme.spacing(50),
+
       height: theme.spacing(60),
+
     },
   },
 }));
@@ -21,22 +26,21 @@ const Landing = () => {
 
   return (
     <div className={classes.root}>
-      <Card sx={{ width: 400, height: 570 }}>
-        <CardMedia
-          component="img"
-          alt="landing page image"
-          width=" 400"
-          height="600"
-          image="/assets/image03-1.jpg"
+      <Paper elevation={0}>
+        <img
+          src="/assets/image03-1.jpg"
+          alt="bar graph"
+          width="400px"
+          height="600 px"
         />
-      </Card>
-      <Card sx={{ width: 400, height: 570 }}>
-        <CardMedia
-          component="img"
-          alt="landing page image"
-          width=" 400"
-          height="600"
-          image="/assets/image03-2.jpg"
+      </Paper>
+
+      <Paper elevation={0}>
+        <img
+          src="/assets/image03-2.jpg"
+          alt="bar graph"
+          width="400px"
+          height="600 px"
         />
         <CardContent>
           <Paper>
@@ -83,15 +87,17 @@ const Landing = () => {
         </CardContent>
       </Card>
 
-      <Card sx={{ width: 400, height: 570 }}>
-        <CardMedia
-          component="img"
-          alt="landing page image"
-          width=" 400"
-          height="600"
-          image="/assets/image03-3.jpg"
+      </Paper>
+
+
+      <Paper elevation={0}>
+        <img
+          src="/assets/image03-3.jpg"
+          alt="bar graph"
+          width="400px"
+          height="600 px"
         />
-      </Card>
+      </Paper>
     </div>
   );
 };

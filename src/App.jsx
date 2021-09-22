@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { ThemeProvider, createTheme } from "@material-ui/core";
 import Auth from "./components/auth/Auth";
+
+import ButtonAppBar from "./components/Navs/LandingNav";
+import ButtonAppBarA from "./components/Navs/HomeNav";
+import EnhancedTable from './components/ViewAll/ViewAll';
+import Landing from "./components/landing/Landing";
+
 import ExpAdd from "./components/expenses/ExpAdd";
 // import Upcoming from "./components/upcoming/Upcoming";
 import "./App.css";

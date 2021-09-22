@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ThemeProvider, createTheme } from "@material-ui/core";
 import Auth from "./components/auth/Auth";
-import Landing from "./components/landing/Landing";
 import ExpAdd from "./components/expenses/ExpAdd";
-import Chart from "./components/chart/Chart";
 // import Upcoming from "./components/upcoming/Upcoming";
 import "./App.css";
 
@@ -92,9 +90,7 @@ function App() {
     <div>
       <ThemeProvider theme={customTheme}>
         <Auth updateToken={updateToken} />
-        <Landing />
-        {/* <ExpAdd token={sessionToken} />
-        <Chart /> */}
+        <ExpAdd token={sessionToken} />
         {/* <Upcoming /> */}
       </ThemeProvider>
     </div>

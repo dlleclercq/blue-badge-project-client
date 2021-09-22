@@ -93,8 +93,8 @@ function App() {
       <ThemeProvider theme={customTheme}>
         <Auth updateToken={updateToken} />
         <Landing />
-        <ExpAdd token={sessionToken} />
-        <Chart />
+        {/* <ExpAdd token={sessionToken} />
+        <Chart /> */}
         {/* <Upcoming /> */}
       </ThemeProvider>
     </div>

@@ -7,9 +7,16 @@ import Login from "./Login";
 
 const Auth = (props) => {
   return (
-    <Grid container direction="column">
+    <Grid
+      container
+      direction="column"
+      style={{ borderBottom: "1px solid #757780", padding: 10 }}
+    >
       <Grid item container>
-        <Grid item sm={10} />
+        <Grid item sm={1}>
+          <img src="./assets/iSpendLogo.png" height="45" width="45" />
+        </Grid>
+        <Grid item sm={9} />
         <Grid item sm={1}>
           <Signup updateToken={props.updateToken} />
         </Grid>

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
-import { Card, CardMedia, CardContent } from "@material-ui/core";
+import { Card, CardMedia, CardContent, Paper } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(3),
       marginTop: theme.spacing(10),
       width: theme.spacing(50),
-      height: theme.spacing(65),
+      height: theme.spacing(60),
     },
   },
 }));
@@ -39,7 +39,7 @@ const Landing = () => {
           image="/assets/image03-2.jpg"
         />
         <CardContent>
-          <paper elevation={20} variant="outlined">
+          <Paper>
             <div
               style={{
                 position: "absolute",
@@ -76,7 +76,7 @@ const Landing = () => {
               help. I'm getting too old for this sort of thing. I want to come
               with you to Alderaan.
             </div>
-          </paper>
+          </Paper>
         </CardContent>
       </Card>
 

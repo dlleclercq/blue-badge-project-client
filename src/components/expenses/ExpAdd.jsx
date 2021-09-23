@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import Chart from "../chart/Chart";
 import { makeStyles } from "@material-ui/core/styles";
-import { Divider } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 
 // drop down list imports
 import InputLabel from "@material-ui/core/InputLabel";
@@ -38,7 +39,19 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 120,
   },
   selectEmpty: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(3),
+  },
+  // root: {
+  //   flexGrow: 1,
+  // },
+  paper: {
+    padding: theme.spacing(0.5),
+    textAlign: "center",
+    justifyContent: "center",
+    // color: "#6ccff6",
+    // fontWeight: "bold",
+    backgroundColor: "#5E0035",
+    // opacity: 0.99,
   },
 }));
 
@@ -127,139 +140,160 @@ const ExpAdd = (props) => {
   };
 
   return (
-    <form>
-      <h1
-        style={{ display: "flex", justifyContent: "center", color: "#6ccff6" }}
-      >
-        EXPENSES
-      </h1>
-      <Grid
-        container
-        spacing={3}
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Grid item container>
-          <Grid item sm={2} />
-          <Grid item sm={1}>
-            {/* category dropdown list */}
-            <FormControl className={classes.formControl}>
-              <InputLabel id="ddlExpCat">Category</InputLabel>
-              <Select
-                labelId="ddlExpCat"
-                id="ddlExpCat"
-                value={category}
-                onChange={updateCategory}
-                required="true"
-                helperText=""
-              >
-                <MenuItem value={"Restaurant"}>Restaurant</MenuItem>
-                <MenuItem value={"Food"}>Food</MenuItem>
-                <MenuItem value={"Electric"}>Electric</MenuItem>
-                <MenuItem value={"Gas"}>Gas</MenuItem>
-                <MenuItem value={"Water"}>Water</MenuItem>
-                <MenuItem value={"Childcare"}>Childcare</MenuItem>
-                <MenuItem value={"Health"}>Health</MenuItem>
-                <MenuItem value={"Beauty"}>Beauty</MenuItem>
-                <MenuItem value={"Other"}>Other</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item sm={9} />
-          <Divider />
-          <Divider />
-
-          <Grid item sm={2} />
-          <Grid item sm={1}>
-            {/* Recurring payment dropdown list  */}
-            <FormControl className={classes.formControl}>
-              <InputLabel id="ddlExpRec">Frequency</InputLabel>
-              <Select
-                labelId="ddlExpRec"
-                id="ddlExpRec"
-                value={reoccuring}
-                onChange={updateReoccuring}
-                required="true"
-                helperText=""
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={true}>Recurring</MenuItem>
-                <MenuItem value={false}>Non-Recurring</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item sm={9} />
-          <Divider />
-          <Grid item sm={2} />
-          <Grid item sm={3}>
-            {/* vendor name input */}
-            <TextField
-              id="txtName"
-              label="payee"
-              variant="standard"
-              onChange={updateName}
-              required="true"
-              helperText=""
-            />
-          </Grid>
-          <Grid item sm={7} />
-          <Divider />
-
-          <Grid item sm={2} />
-          <Grid item sm={1}>
-            {/* amount input */}
-            <TextField
-              id="txtAmount"
-              label="Amount"
-              variant="standard"
-              onChange={updateAmount}
-              required="true"
-              helperText=""
-            />
-          </Grid>
-          <Grid item sm={9} />
-          <Divider />
-          <Grid item sm={2} />
-          <Grid item sm={1}>
-            {/* Left blank intentionally to allow space for date field */}
-          </Grid>
-          <Grid item sm={9} />
-          <Divider />
-          <Grid item sm={2} />
-          <Grid item sm={2}>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <KeyboardDatePicker
-                variant="outlined"
-                margin="normal"
-                name="dpDueDate"
-                id="dpDueDate"
-                format="MM/dd/yyyy"
-                label="Date"
-                clearable
-                value={dueDate}
-                onChange={updateDueDate}
-                required="true"
-                helperText=""
-                KeyboardButtonProps={{
-                  "aria-label": "change date",
-                }}
+    <div className={classes.root}>
+      <form>
+        <Grid container spacing={3} direction="row">
+          <Grid item container style={{ borderBottom: "1px solid #757780" }}>
+            <Grid item xs={1}>
+              <img
+                src="./assets/iSpendLogo.png"
+                height="45"
+                width="45"
+                alt="iSpend Logo"
               />
-            </MuiPickersUtilsProvider>
+            </Grid>
+            <Grid item xs={11} />
+            <Grid item xs={1} />
+            <Grid item xs={11}>
+              <h1
+                style={{
+                  display: "flex",
+                  justifyContent: "left",
+                  color: "#6ccff6",
+                }}
+              >
+                EXPENSES
+              </h1>
+            </Grid>
           </Grid>
-          <Grid item sm={8} />
-          <Divider />
-          <Grid item sm={2} />
-          <Divider />
-          <Grid item sm={2}>
-            <Button variant="contained" color="secondary" onClick={addExpense}>
-              Add Expense
-            </Button>
-            <Button variant="contained" color="secondary" onClick={clearForm}>
-              Clear
-            </Button>
+
+          <Grid
+            item
+            container
+            style={{ justifyContent: "center", marginTop: "5px" }}
+          >
+            <Paper className={classes.paper}>
+              <Chart />
+            </Paper>
+          </Grid>
+
+          <Grid item xs={4} />
+
+          <Grid item xs={2}>
+            <Paper className={classes.paper}>
+              {/* category dropdown list */}
+              <FormControl className={classes.formControl}>
+                <InputLabel id="ddlExpCat">Category</InputLabel>
+                <Select
+                  labelId="ddlExpCat"
+                  id="ddlExpCat"
+                  value={category}
+                  onChange={updateCategory}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={"Restaurant"}>Restaurant</MenuItem>
+                  <MenuItem value={"Food"}>Food</MenuItem>
+                  <MenuItem value={"Electric"}>Electric</MenuItem>
+                  <MenuItem value={"Gas"}>Gas</MenuItem>
+                  <MenuItem value={"Water"}>Water</MenuItem>
+                  <MenuItem value={"Childcare"}>Childcare</MenuItem>
+                  <MenuItem value={"Health"}>Health</MenuItem>
+                  <MenuItem value={"Beauty"}>Beauty</MenuItem>
+                  <MenuItem value={"Other"}>Other</MenuItem>
+                </Select>
+              </FormControl>
+            </Paper>
+          </Grid>
+
+          <Grid item xs={2}>
+            <Paper className={classes.paper}>
+              {/* Recurring payment dropdown list  */}
+              <FormControl className={classes.formControl}>
+                <InputLabel id="ddlExpRec">Frequency</InputLabel>
+                <Select
+                  labelId="ddlExpRec"
+                  id="ddlExpRec"
+                  value={reoccuring}
+                  onChange={updateReoccuring}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={true}>Recurring</MenuItem>
+                  <MenuItem value={false}>Non-Recurring</MenuItem>
+                </Select>
+              </FormControl>
+            </Paper>
+          </Grid>
+
+          <Grid item xs={4} />
+
+          <Grid item xs={4} />
+
+          <Grid item xs={2}>
+            <Paper className={classes.paper}>
+              {/* vendor name input */}
+              <TextField
+                id="txtName"
+                label="Vendor"
+                variant="standard"
+                onChange={updateName}
+              />
+            </Paper>
+          </Grid>
+          <Grid item xs={2}>
+            <Paper className={classes.paper}>
+              {/* amount input */}
+              <TextField
+                id="txtAmount"
+                label="Payment Amount"
+                variant="standard"
+                onChange={updateAmount}
+              />
+            </Paper>
+          </Grid>
+
+          <Grid item xs={4} />
+
+          <Grid item xs={5} />
+
+          <Grid item xs={2}>
+            <Paper className={classes.paper}>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  variant="standard"
+                  margin="normal"
+                  id="dpDueDate"
+                  format="MM/dd/yyyy"
+                  label="Due Date"
+                  helperText=""
+                  clearable
+                  value={dueDate}
+                  onChange={updateDueDate}
+                  KeyboardButtonProps={{
+                    "aria-label": "change date",
+                  }}
+                />
+              </MuiPickersUtilsProvider>
+            </Paper>
+          </Grid>
+
+          <Grid item xs={5} />
+
+          <Grid item xs={5} />
+
+          <Grid item xs={2}>
+            <Paper style={{ backgroundColor: "#020202" }}>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={addExpense}
+              >
+                Add Expense
+              </Button>
+            </Paper>
           </Grid>
           <Grid item sm={2} />
           <Divider />
@@ -291,8 +325,8 @@ const ExpAdd = (props) => {
           <Grid item sm={9} />
           <Divider />
         </Grid>
-      </Grid>
-    </form>
+      </form>
+    </div>
   );
 };
 

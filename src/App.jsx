@@ -12,6 +12,10 @@ import ExpAdd from "./components/expenses/ExpAdd";
 import Chart from "./components/chart/Chart";
 import ExpSearch from "./components/expenses/ExpSearch";
 // import Upcoming from "./components/upcoming/Upcoming";
+import PrimarySearchAppBar from "./components/Navs/HomeNav";
+import ExpAdd from "./components/expenses/ExpAdd";
+import Upcoming from "./components/upcoming/Upcoming";
+
 import "./App.css";
 
 //teal = #6CCFF6
@@ -36,13 +40,7 @@ const customTheme = createTheme({
   },
 
   typography: {
-    h1: { color: "#6CCFF6", fontWeight: "bold" },
-    h2: { color: "#6CCFF6", fontWeight: "bold" },
-    h3: { color: "#6CCFF6", fontWeight: "bold" },
-    h4: { color: "#6CCFF6", fontWeight: "bold" },
-    h5: { color: "#6CCFF6", fontWeight: "bold" },
-    h6: { color: "#6CCFF6", fontWeight: "bold" },
-    body1: { color: "#6CCFF6" },
+    body1: { color: "#020202", fontWeight: "bold" },
   },
 
   overrides: {
@@ -54,22 +52,10 @@ const customTheme = createTheme({
     },
     MuiSelect: {
       select: {
-        color: "#6CCFF6",
+        color: "#020202",
       },
       icon: {
-        color: "#6ccff6",
-      },
-    },
-    MuiInputBase: {
-      formControl: {
-        underline: {
-          color: "#6ccff6",
-        },
-      },
-    },
-    MuiInput: {
-      underline: {
-        color: "#6ccff6",
+        color: "#020202",
       },
     },
   },
@@ -95,11 +81,12 @@ function App() {
       <ThemeProvider theme={customTheme}>
         <ExpSplash token={sessionToken} />
         <Auth updateToken={updateToken} />
-        <Landing />
+        <PrimarySearchAppBar />
         <ExpAdd token={sessionToken} />
         {/* <ExpSearch token={sessionToken} />  */}
         <Chart />
         {/* <Upcoming /> */}
+        <Upcoming />
       </ThemeProvider>
     </div>
   );

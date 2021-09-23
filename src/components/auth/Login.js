@@ -51,7 +51,7 @@ const Login = (props) => {
       >
         <DialogTitle id="form-dialog-title">Login</DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText color="primary">
             To login to iSpend, please enter the following:
           </DialogContentText>
 

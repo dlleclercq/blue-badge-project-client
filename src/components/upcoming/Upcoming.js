@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardHeader, CardContent, Typography } from "@material-ui/core";
+import { Card, CardHeader, Typography } from "@material-ui/core";
 import { Pie } from "react-chartjs-2";
 
 const Upcoming = (props) => {

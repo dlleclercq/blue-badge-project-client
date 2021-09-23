@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Chart from "../chart/Chart";
 
 import { makeStyles } from "@material-ui/core/styles";
-import { Divider } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 
 // drop down list imports
 import InputLabel from "@material-ui/core/InputLabel";
@@ -33,7 +33,19 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 120,
   },
   selectEmpty: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(3),
+  },
+  // root: {
+  //   flexGrow: 1,
+  // },
+  paper: {
+    padding: theme.spacing(0.5),
+    textAlign: "center",
+    justifyContent: "center",
+    // color: "#6ccff6",
+    // fontWeight: "bold",
+    backgroundColor: "#5E0035",
+    // opacity: 0.99,
   },
 }));
 
@@ -100,27 +112,47 @@ const ExpAdd = (props) => {
   };
 
   return (
-    <div>
+    <div className={classes.root}>
       <form>
-        <h1
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            color: "#6ccff6",
-          }}
-        >
-          EXPENSES
-        </h1>
-        <Grid
-          container
-          spacing={3}
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Grid item container>
-            <Grid item sm={2} />
-            <Grid item sm={1}>
+        <Grid container spacing={3} direction="row">
+          <Grid item container style={{ borderBottom: "1px solid #757780" }}>
+            <Grid item xs={1}>
+              <img
+                src="./assets/iSpendLogo.png"
+                height="45"
+                width="45"
+                alt="iSpend Logo"
+              />
+            </Grid>
+            <Grid item xs={11} />
+            <Grid item xs={1} />
+            <Grid item xs={11}>
+              <h1
+                style={{
+                  display: "flex",
+                  justifyContent: "left",
+                  color: "#6ccff6",
+                }}
+              >
+                EXPENSES
+              </h1>
+            </Grid>
+          </Grid>
+
+          <Grid
+            item
+            container
+            style={{ justifyContent: "center", marginTop: "5px" }}
+          >
+            <Paper className={classes.paper}>
+              <Chart />
+            </Paper>
+          </Grid>
+
+          <Grid item xs={4} />
+
+          <Grid item xs={2}>
+            <Paper className={classes.paper}>
               {/* category dropdown list */}
               <FormControl className={classes.formControl}>
                 <InputLabel id="ddlExpCat">Category</InputLabel>
@@ -144,13 +176,11 @@ const ExpAdd = (props) => {
                   <MenuItem value={"Other"}>Other</MenuItem>
                 </Select>
               </FormControl>
-            </Grid>
-            <Grid item sm={9} />
-            <Divider />
-            <Divider />
+            </Paper>
+          </Grid>
 
-            <Grid item sm={2} />
-            <Grid item sm={1}>
+          <Grid item xs={2}>
+            <Paper className={classes.paper}>
               {/* Recurring payment dropdown list  */}
               <FormControl className={classes.formControl}>
                 <InputLabel id="ddlExpRec">Frequency</InputLabel>
@@ -167,11 +197,15 @@ const ExpAdd = (props) => {
                   <MenuItem value={false}>Non-Recurring</MenuItem>
                 </Select>
               </FormControl>
-            </Grid>
-            <Grid item sm={9} />
-            <Divider />
-            <Grid item sm={2} />
-            <Grid item sm={1}>
+            </Paper>
+          </Grid>
+
+          <Grid item xs={4} />
+
+          <Grid item xs={4} />
+
+          <Grid item xs={2}>
+            <Paper className={classes.paper}>
               {/* vendor name input */}
               <TextField
                 id="txtName"
@@ -179,12 +213,11 @@ const ExpAdd = (props) => {
                 variant="standard"
                 onChange={updateName}
               />
-            </Grid>
-            <Grid item sm={9} />
-            <Divider />
+            </Paper>
+          </Grid>
 
-            <Grid item sm={2} />
-            <Grid item sm={1}>
+          <Grid item xs={2}>
+            <Paper className={classes.paper}>
               {/* amount input */}
               <TextField
                 id="txtAmount"
@@ -192,12 +225,15 @@ const ExpAdd = (props) => {
                 variant="standard"
                 onChange={updateAmount}
               />
-            </Grid>
-            <Grid item sm={9} />
-            <Divider />
+            </Paper>
+          </Grid>
 
-            <Grid item sm={2} />
-            <Grid item sm={1}>
+          <Grid item xs={4} />
+
+          <Grid item xs={5} />
+
+          <Grid item xs={2}>
+            <Paper className={classes.paper}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
                   variant="standard"
@@ -214,13 +250,15 @@ const ExpAdd = (props) => {
                   }}
                 />
               </MuiPickersUtilsProvider>
-            </Grid>
-            <Grid item sm={9} />
-            <Divider />
+            </Paper>
+          </Grid>
 
-            <Grid item sm={2} />
-            <Divider />
-            <Grid item sm={2}>
+          <Grid item xs={5} />
+
+          <Grid item xs={5} />
+
+          <Grid item xs={2}>
+            <Paper style={{ backgroundColor: "#020202" }}>
               <Button
                 variant="contained"
                 color="secondary"
@@ -228,11 +266,10 @@ const ExpAdd = (props) => {
               >
                 Add Expense
               </Button>
-            </Grid>
+            </Paper>
           </Grid>
         </Grid>
       </form>
-      <Chart />
     </div>
   );
 };

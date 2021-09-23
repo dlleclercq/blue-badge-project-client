@@ -1,6 +1,17 @@
+import "./App.css";
 import React, { useState, useEffect } from "react";
 import { ThemeProvider, createTheme } from "@material-ui/core";
 import Auth from "./components/auth/Auth";
+// import { PinDropSharp } from '@material-ui/icons';
+import ExpSplash from "./components/expenses/ExpSplash";
+import ButtonAppBar from "./components/Navs/LandingNav";
+import ButtonAppBarA from "./components/Navs/HomeNav";
+import EnhancedTable from './components/ViewAll/ViewAll';
+import Landing from "./components/landing/Landing";
+import ExpAdd from "./components/expenses/ExpAdd";
+import Chart from "./components/chart/Chart";
+import ExpSearch from "./components/expenses/ExpSearch";
+// import Upcoming from "./components/upcoming/Upcoming";
 import PrimarySearchAppBar from "./components/Navs/HomeNav";
 import ExpAdd from "./components/expenses/ExpAdd";
 import Upcoming from "./components/upcoming/Upcoming";
@@ -65,17 +76,16 @@ function App() {
     console.log(sessionToken);
   };
 
-  // const clearToken = () => {
-  //   localStorage.clear();
-  //   setSessionToken("");
-  // };
-
-  return (
-    <div>
+  return (    
+    <div>      
       <ThemeProvider theme={customTheme}>
+        <ExpSplash token={sessionToken} />
         <Auth updateToken={updateToken} />
         <PrimarySearchAppBar />
         <ExpAdd token={sessionToken} />
+        {/* <ExpSearch token={sessionToken} />  */}
+        <Chart />
+        {/* <Upcoming /> */}
         <Upcoming />
       </ThemeProvider>
     </div>

@@ -8,7 +8,6 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import ExpAdd from "./ExpAdd";
-import FormikAdd from "./FormikAdd";
 
 const ExpSplash = (props) => {
   const [showButton, setShowButton] = useState(false);
@@ -65,7 +64,6 @@ const ExpSplash = (props) => {
               <Toolbar />
               <Typography paragraph>
                 <ExpAdd token={token} />
-                {/* <FormikAdd token={token} /> */}
               </Typography>
               <Typography paragraph></Typography>
             </Box>

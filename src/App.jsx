@@ -10,6 +10,7 @@ import EnhancedTable from './components/ViewAll/ViewAll';
 import Landing from "./components/landing/Landing";
 import ExpAdd from "./components/expenses/ExpAdd";
 import Chart from "./components/chart/Chart";
+import ExpSearch from "./components/expenses/ExpSearch";
 // import Upcoming from "./components/upcoming/Upcoming";
 import "./App.css";
 
@@ -96,7 +97,8 @@ function App() {
         <Auth updateToken={updateToken} />
         <Landing />
         <ExpAdd token={sessionToken} />
-        <Chart />
+        <ExpSearch token={sessionToken} /> 
+        {/* <Chart /> */}
         {/* <Upcoming /> */}
       </ThemeProvider>
     </div>

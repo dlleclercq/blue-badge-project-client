@@ -25,27 +25,12 @@ import { FormControl } from "@material-ui/core";
 // layout imports
 import { Grid } from "@material-ui/core";
 
-// modal imports
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-
-import { formik, yupToFormErrors} from 'formik';
-import * as Yup from 'yup'; 
-
-// style for modal
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
-import Grid from "@material-ui/core/Grid";
+// dialog box 
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -77,17 +62,12 @@ const ExpAdd = (props) => {
     setReoccuring(false);
     
     // reset input on form
-
+    
   }
 
-  // modal variables
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  // update state variables with data from inputs
+  // update state variables with form inputs
   let updateCategory = (e) => {
-    setCategory(e.target.value);
+    setCategory(e.target.value);  
   };
 
   let updateName = (e) => {
@@ -105,6 +85,23 @@ const ExpAdd = (props) => {
   let updateReoccuring = (e) => {
     setReoccuring(e.target.value);
   };
+
+  // declare variable to hold error message
+  let errors = {
+    category: '',
+    name: '',
+    amount: '',
+    dueDate: ''
+  }
+
+  // const validate = (e) => {
+  //   if(category === '') errors.category = 'Category is required.'; 
+  //   if(name === '') errors.name = ' The payment amount is required.';
+  //   if(amount === '') errors.amount = ' The payment amount is required'; 
+  //   if(dueDate === '') errors.dueDate = ' The due date is required.';
+  //   console.log("errors after validation", errors);
+  //   (errors !== '') ? handleClickOpen() : addExpense(e);
+  // }
 
   // fetch to submit info to database
   let addExpense = (e) => {
@@ -127,10 +124,19 @@ const ExpAdd = (props) => {
       }),
     })
       .then((res) => res.json())
-      ;
+      // .then(handleClickOpen)
+  };  
+
+  // Dialog box 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
   };
 
-  
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <form>
@@ -157,10 +163,9 @@ const ExpAdd = (props) => {
                 id="ddlExpCat"
                 value={category}
                 onChange={updateCategory}
+                error
+                helperText=""
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
                 <MenuItem value={"Restaurant"}>Restaurant</MenuItem>
                 <MenuItem value={"Food"}>Food</MenuItem>
                 <MenuItem value={"Electric"}>Electric</MenuItem>
@@ -187,6 +192,8 @@ const ExpAdd = (props) => {
                 id="ddlExpRec"
                 value={reoccuring}
                 onChange={updateReoccuring}
+                error
+                helperText=""
               >
                 <MenuItem value="">
                   <em>None</em>
@@ -199,16 +206,18 @@ const ExpAdd = (props) => {
           <Grid item sm={9} />
           <Divider />
           <Grid item sm={2} />
-          <Grid item sm={1}>
+          <Grid item sm={3}>
             {/* vendor name input */}
             <TextField
               id="txtName"
-              label="Vendor"
+              label="payee"
               variant="standard"
               onChange={updateName}
+              error
+              helperText=""
             />
           </Grid>
-          <Grid item sm={9} />
+          <Grid item sm={7} />
           <Divider />
 
           <Grid item sm={2} />
@@ -216,36 +225,44 @@ const ExpAdd = (props) => {
             {/* amount input */}
             <TextField
               id="txtAmount"
-              label="Payment Amount"
+              label="Amount"
               variant="standard"
               onChange={updateAmount}
+              error
+              helperText=""
             />
           </Grid>
           <Grid item sm={9} />
           <Divider />
-
           <Grid item sm={2} />
           <Grid item sm={1}>
+          {/* Left blank intentionally to allow space for date field */}
+          </Grid>
+          <Grid item sm={9} />
+          <Divider />
+          <Grid item sm={2} />
+          <Grid item sm={2}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
-                variant="standard"
+                variant="outlined"
                 margin="normal"
+                name="dpDueDate"
                 id="dpDueDate"
                 format="MM/dd/yyyy"
-                label="Due Date"
-                helperText=""
+                label="Date"
                 clearable
                 value={dueDate}
                 onChange={updateDueDate}
+                error
+                helperText=""
                 KeyboardButtonProps={{
                   "aria-label": "change date",
                 }}
               />
             </MuiPickersUtilsProvider>
           </Grid>
-          <Grid item sm={9} />
+          <Grid item sm={8} />
           <Divider />
-
           <Grid item sm={2} />
           <Divider />
           <Grid item sm={2}>
@@ -253,6 +270,43 @@ const ExpAdd = (props) => {
               Add Expense
             </Button>
           </Grid>
+          <Grid item sm={2} />
+          <Divider />          
+          <Grid item sm={2}>
+            <Button variant="contained" color="secondary" onClick={clearForm}>
+              Clear
+            </Button>
+          </Grid>
+          <Grid item sm={2} />
+          <Divider />
+          <Grid item sm={2} />     
+          <Grid item sm={1}>          
+          {/* err/succ msg */}
+          <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Confirmation"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+           {/* { ({errors} === '') ? 'Your payment has been successfully added.' : {errors}}  */}
+           Your payment has been successfully added.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          {/* <Button onClick={handleClose}>Disagree</Button> */}
+          <Button onClick={handleClose} autoFocus>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
+          </Grid>
+          <Grid item sm={9} />
+          <Divider />
         </Grid>
       </Grid>
     </form>

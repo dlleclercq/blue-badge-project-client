@@ -1,8 +1,20 @@
+import "./App.css";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@material-ui/core";
 import Auth from "./components/auth/Auth";
 import HomeNav from "./components/Navs/HomeNav";
+// import { PinDropSharp } from '@material-ui/icons';
+import ExpSplash from "./components/expenses/ExpSplash";
+import ButtonAppBar from "./components/Navs/LandingNav";
+import ButtonAppBarA from "./components/Navs/HomeNav";
+import EnhancedTable from './components/ViewAll/ViewAll';
+import Landing from "./components/landing/Landing";
+import ExpAdd from "./components/expenses/ExpAdd";
+import Chart from "./components/chart/Chart";
+import ExpSearch from "./components/expenses/ExpSearch";
+// import Upcoming from "./components/upcoming/Upcoming";
+import PrimarySearchAppBar from "./components/Navs/HomeNav";
 import ExpAdd from "./components/expenses/ExpAdd";
 import PageNotFound from "./components/PageNotFound";
 import Upcoming from "./components/upcoming/Upcoming";
@@ -87,6 +99,8 @@ function App() {
             </Route>
             <Route exact path="/HomeNav" component={HomeNav} />
             <Route exact path="/ExpAdd">
+                      <ExpSplash token={sessionToken} />
+
               <ExpAdd token={sessionToken} />
             </Route>
             <Route exact path="*" component={PageNotFound} />
@@ -97,7 +111,5 @@ function App() {
         </ThemeProvider>
       </div>
     </Router>
-  );
 }
-
 export default App;

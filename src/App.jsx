@@ -3,7 +3,7 @@ import { ThemeProvider, createTheme } from "@material-ui/core";
 import Auth from "./components/auth/Auth";
 import ButtonAppBar from "./components/Navs/LandingNav";
 import ButtonAppBarA from "./components/Navs/HomeNav";
-import EnhancedTable from './components/ViewAll/ViewAll';
+import ExpenseTable from './components/ViewAll/ViewAll';
 import Landing from "./components/landing/Landing";
 import ExpAdd from "./components/expenses/ExpAdd";
 // import ExpAdd2 from "./components/expenses/ExpAdd2";
@@ -80,11 +80,7 @@ function App() {
   return (
     <div>
       <ThemeProvider theme={customTheme}>
-        <Auth updateToken={updateToken} />
-        <Landing />
-        <ExpAdd token={sessionToken} />
-        {/* {/* <ExpAdd2 token={sessionToken} /> */}
-        <Chart />
+        <ExpenseTable />
       </ThemeProvider>
     </div>
   );

@@ -102,15 +102,6 @@ const ExpAdd = (props) => {
   return (
     <div>
       <form>
-        <h1
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            color: "#6ccff6",
-          }}
-        >
-          EXPENSES
-        </h1>
         <Grid
           container
           spacing={3}
@@ -118,9 +109,18 @@ const ExpAdd = (props) => {
           justifyContent="center"
           alignItems="center"
         >
+          <h1
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              color: "#6ccff6",
+            }}
+          >
+            EXPENSES
+          </h1>
           <Grid item container>
             <Grid item sm={2} />
-            <Grid item sm={1}>
+            <Grid item xs={1}>
               {/* category dropdown list */}
               <FormControl className={classes.formControl}>
                 <InputLabel id="ddlExpCat">Category</InputLabel>
@@ -147,10 +147,9 @@ const ExpAdd = (props) => {
             </Grid>
             <Grid item sm={9} />
             <Divider />
-            <Divider />
-
+            \
             <Grid item sm={2} />
-            <Grid item sm={1}>
+            <Grid item xs={1}>
               {/* Recurring payment dropdown list  */}
               <FormControl className={classes.formControl}>
                 <InputLabel id="ddlExpRec">Frequency</InputLabel>
@@ -168,10 +167,10 @@ const ExpAdd = (props) => {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item sm={9} />
+            <Grid item xs={9} />
             <Divider />
-            <Grid item sm={2} />
-            <Grid item sm={1}>
+            <Grid item xs={2} />
+            <Grid item xs={1}>
               {/* vendor name input */}
               <TextField
                 id="txtName"
@@ -180,11 +179,10 @@ const ExpAdd = (props) => {
                 onChange={updateName}
               />
             </Grid>
-            <Grid item sm={9} />
+            <Grid item xs={9} />
             <Divider />
-
-            <Grid item sm={2} />
-            <Grid item sm={1}>
+            <Grid item xs={2} />
+            <Grid item xs={1}>
               {/* amount input */}
               <TextField
                 id="txtAmount"
@@ -195,9 +193,8 @@ const ExpAdd = (props) => {
             </Grid>
             <Grid item sm={9} />
             <Divider />
-
             <Grid item sm={2} />
-            <Grid item sm={1}>
+            <Grid item xs={1}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
                   variant="standard"
@@ -217,10 +214,9 @@ const ExpAdd = (props) => {
             </Grid>
             <Grid item sm={9} />
             <Divider />
-
             <Grid item sm={2} />
             <Divider />
-            <Grid item sm={2}>
+            <Grid item xs={2}>
               <Button
                 variant="contained"
                 color="secondary"
@@ -232,7 +228,12 @@ const ExpAdd = (props) => {
           </Grid>
         </Grid>
       </form>
-      <Chart />
+      <Divider />
+      <Grid container>
+        <Grid item xs={1}>
+          <Chart />
+        </Grid>
+      </Grid>
     </div>
   );
 };

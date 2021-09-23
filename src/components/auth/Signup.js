@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+// import { useHistory } from "react-router-dom";
+
 import {
   Button,
   TextField,
@@ -84,7 +86,11 @@ const Signup = (props) => {
             <Button onClick={handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={handleClose} type="submit" color="primary">
+            <Button
+              onClick={(event) => (window.location.href = "/ExpAdd")}
+              type="submit"
+              color="primary"
+            >
               Signup
             </Button>
           </form>

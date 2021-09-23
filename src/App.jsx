@@ -89,7 +89,7 @@ function App() {
   return (
     <div>
       <ThemeProvider theme={customTheme}>
-        <Auth updateToken={updateToken} />
+        {/* <Auth updateToken={updateToken} /> */}
         <ExpAdd token={sessionToken} />
         {/* <Upcoming /> */}
       </ThemeProvider>

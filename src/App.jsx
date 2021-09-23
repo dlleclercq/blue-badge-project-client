@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@material-ui/core";
 import Auth from "./components/auth/Auth";
-import PrimarySearchAppBar from "./components/Navs/HomeNav";
+import HomeNav from "./components/Navs/HomeNav";
 import ExpAdd from "./components/expenses/ExpAdd";
+import PageNotFound from "./components/PageNotFound";
 import Upcoming from "./components/upcoming/Upcoming";
 
 import "./App.css";
@@ -47,6 +49,11 @@ const customTheme = createTheme({
         color: "#020202",
       },
     },
+    MuiInput: {
+      underline: {
+        color: "#020202",
+      },
+    },
   },
 });
 
@@ -71,14 +78,25 @@ function App() {
   // };
 
   return (
-    <div>
-      <ThemeProvider theme={customTheme}>
-        <Auth updateToken={updateToken} />
-        <PrimarySearchAppBar />
-        <ExpAdd token={sessionToken} />
-        <Upcoming />
-      </ThemeProvider>
-    </div>
+    <Router>
+      <div>
+        <ThemeProvider theme={customTheme}>
+          <Switch>
+            <Route exact path="/">
+              <Auth updateToken={updateToken} />
+            </Route>
+            <Route exact path="/HomeNav" component={HomeNav} />
+            <Route exact path="/ExpAdd">
+              <ExpAdd token={sessionToken} />
+            </Route>
+            <Route exact path="*" component={PageNotFound} />
+          </Switch>
+          {/* <HomeNav /> */}
+
+          {/* <Upcoming /> */}
+        </ThemeProvider>
+      </div>
+    </Router>
   );
 }
 

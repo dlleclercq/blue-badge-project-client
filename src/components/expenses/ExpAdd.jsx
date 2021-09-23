@@ -159,6 +159,7 @@ const ExpAdd = (props) => {
                 <Select
                   labelId="ddlExpCat"
                   id="ddlExpCat"
+                  disableUnderline="true"
                   value={category}
                   onChange={updateCategory}
                 >
@@ -189,6 +190,7 @@ const ExpAdd = (props) => {
                   id="ddlExpRec"
                   value={reoccuring}
                   onChange={updateReoccuring}
+                  disableUnderline="false"
                 >
                   <MenuItem value="">
                     <em>None</em>
@@ -236,12 +238,15 @@ const ExpAdd = (props) => {
             <Paper className={classes.paper}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
-                  variant="standard"
+                  inputVariant="standard"
+                  variant="dialog"
                   margin="normal"
                   id="dpDueDate"
                   format="MM/dd/yyyy"
                   label="Due Date"
                   helperText=""
+                  disablePast="true"
+                  disableToolbar="true"
                   clearable
                   value={dueDate}
                   onChange={updateDueDate}

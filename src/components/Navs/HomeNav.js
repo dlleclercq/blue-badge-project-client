@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function HomeNav() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 

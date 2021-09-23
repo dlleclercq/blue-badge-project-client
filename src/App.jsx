@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { ThemeProvider, createTheme } from "@material-ui/core";
 import Auth from "./components/auth/Auth";
-
-import ButtonAppBar from "./components/Navs/LandingNav";
-import ButtonAppBarA from "./components/Navs/HomeNav";
-import EnhancedTable from './components/ViewAll/ViewAll';
-import Landing from "./components/landing/Landing";
-
+import PrimarySearchAppBar from "./components/Navs/HomeNav";
 import ExpAdd from "./components/expenses/ExpAdd";
-// import Upcoming from "./components/upcoming/Upcoming";
+import Upcoming from "./components/upcoming/Upcoming";
+
 import "./App.css";
 
 //teal = #6CCFF6
@@ -33,13 +29,7 @@ const customTheme = createTheme({
   },
 
   typography: {
-    h1: { color: "#6CCFF6", fontWeight: "bold" },
-    h2: { color: "#6CCFF6", fontWeight: "bold" },
-    h3: { color: "#6CCFF6", fontWeight: "bold" },
-    h4: { color: "#6CCFF6", fontWeight: "bold" },
-    h5: { color: "#6CCFF6", fontWeight: "bold" },
-    h6: { color: "#6CCFF6", fontWeight: "bold" },
-    body1: { color: "#6CCFF6" },
+    body1: { color: "#020202", fontWeight: "bold" },
   },
 
   overrides: {
@@ -51,22 +41,10 @@ const customTheme = createTheme({
     },
     MuiSelect: {
       select: {
-        color: "#6CCFF6",
+        color: "#020202",
       },
       icon: {
-        color: "#6ccff6",
-      },
-    },
-    MuiInputBase: {
-      formControl: {
-        underline: {
-          color: "#6ccff6",
-        },
-      },
-    },
-    MuiInput: {
-      underline: {
-        color: "#6ccff6",
+        color: "#020202",
       },
     },
   },
@@ -95,9 +73,10 @@ function App() {
   return (
     <div>
       <ThemeProvider theme={customTheme}>
-        {/* <Auth updateToken={updateToken} /> */}
+        <Auth updateToken={updateToken} />
+        <PrimarySearchAppBar />
         <ExpAdd token={sessionToken} />
-        {/* <Upcoming /> */}
+        <Upcoming />
       </ThemeProvider>
     </div>
   );

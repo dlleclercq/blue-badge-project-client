@@ -25,12 +25,12 @@ import { FormControl } from "@material-ui/core";
 // layout imports
 import { Grid } from "@material-ui/core";
 
-// dialog box 
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+// dialog box
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -60,14 +60,11 @@ const ExpAdd = (props) => {
     setAmount("");
     setDueDate("");
     setReoccuring(false);
-    
-    // reset input on form
-    
-  }
+  };
 
   // update state variables with form inputs
   let updateCategory = (e) => {
-    setCategory(e.target.value);  
+    setCategory(e.target.value);
   };
 
   let updateName = (e) => {
@@ -88,20 +85,11 @@ const ExpAdd = (props) => {
 
   // declare variable to hold error message
   let errors = {
-    category: '',
-    name: '',
-    amount: '',
-    dueDate: ''
-  }
-
-  // const validate = (e) => {
-  //   if(category === '') errors.category = 'Category is required.'; 
-  //   if(name === '') errors.name = ' The payment amount is required.';
-  //   if(amount === '') errors.amount = ' The payment amount is required'; 
-  //   if(dueDate === '') errors.dueDate = ' The due date is required.';
-  //   console.log("errors after validation", errors);
-  //   (errors !== '') ? handleClickOpen() : addExpense(e);
-  // }
+    category: "",
+    name: "",
+    amount: "",
+    dueDate: "",
+  };
 
   // fetch to submit info to database
   let addExpense = (e) => {
@@ -124,10 +112,10 @@ const ExpAdd = (props) => {
       }),
     })
       .then((res) => res.json())
-      // .then(handleClickOpen)
-  };  
+      .then(handleClickOpen);
+  };
 
-  // Dialog box 
+  // Dialog box
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -163,7 +151,7 @@ const ExpAdd = (props) => {
                 id="ddlExpCat"
                 value={category}
                 onChange={updateCategory}
-                error
+                required="true"
                 helperText=""
               >
                 <MenuItem value={"Restaurant"}>Restaurant</MenuItem>
@@ -192,7 +180,7 @@ const ExpAdd = (props) => {
                 id="ddlExpRec"
                 value={reoccuring}
                 onChange={updateReoccuring}
-                error
+                required="true"
                 helperText=""
               >
                 <MenuItem value="">
@@ -213,7 +201,7 @@ const ExpAdd = (props) => {
               label="payee"
               variant="standard"
               onChange={updateName}
-              error
+              required="true"
               helperText=""
             />
           </Grid>
@@ -228,7 +216,7 @@ const ExpAdd = (props) => {
               label="Amount"
               variant="standard"
               onChange={updateAmount}
-              error
+              required="true"
               helperText=""
             />
           </Grid>
@@ -236,7 +224,7 @@ const ExpAdd = (props) => {
           <Divider />
           <Grid item sm={2} />
           <Grid item sm={1}>
-          {/* Left blank intentionally to allow space for date field */}
+            {/* Left blank intentionally to allow space for date field */}
           </Grid>
           <Grid item sm={9} />
           <Divider />
@@ -253,7 +241,7 @@ const ExpAdd = (props) => {
                 clearable
                 value={dueDate}
                 onChange={updateDueDate}
-                error
+                required="true"
                 helperText=""
                 KeyboardButtonProps={{
                   "aria-label": "change date",
@@ -269,41 +257,36 @@ const ExpAdd = (props) => {
             <Button variant="contained" color="secondary" onClick={addExpense}>
               Add Expense
             </Button>
-          </Grid>
-          <Grid item sm={2} />
-          <Divider />          
-          <Grid item sm={2}>
             <Button variant="contained" color="secondary" onClick={clearForm}>
               Clear
             </Button>
           </Grid>
           <Grid item sm={2} />
           <Divider />
-          <Grid item sm={2} />     
-          <Grid item sm={1}>          
-          {/* err/succ msg */}
-          <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Confirmation"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-           {/* { ({errors} === '') ? 'Your payment has been successfully added.' : {errors}}  */}
-           Your payment has been successfully added.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          {/* <Button onClick={handleClose}>Disagree</Button> */}
-          <Button onClick={handleClose} autoFocus>
-            OK
-          </Button>
-        </DialogActions>
-      </Dialog>
+          <Grid item sm={2} />
+          <Grid item sm={1}>
+            {/* err/succ msg */}
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">
+                {"Confirmation"}
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  Your payment has been successfully added.
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                {/* <Button onClick={handleClose}>Disagree</Button> */}
+                <Button onClick={handleClose} autoFocus>
+                  OK
+                </Button>
+              </DialogActions>
+            </Dialog>
           </Grid>
           <Grid item sm={9} />
           <Divider />

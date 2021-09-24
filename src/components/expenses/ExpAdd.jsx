@@ -57,6 +57,11 @@ const ExpAdd = (props) => {
   const [amount, setAmount] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [reoccuring, setReoccuring] = React.useState(false);
+  const [amountError, setAmountError] = useState(false);
+  const [nameError, setNameError] = useState(false);
+  const [dateError, setDateError] = useState(false);
+  const [categoryError, setcategoryError] = useState(false);
+  const [reoccuringError, setReoccuringError] = useState(false);
 
   // function to clear values after fetch
   const clearForm = () => {
@@ -89,18 +94,36 @@ const ExpAdd = (props) => {
     setReoccuring(e.target.value);
   };
 
-  // declare variable to hold error message
-  let errors = {
-    category: "",
-    name: "",
-    amount: "",
-    dueDate: "",
-  };
-
-  // fetch to submit info to database
+  // validate input form return section
   let addExpense = (e) => {
     e.preventDefault();
 
+    if(!amount) {
+      setAmountError(true)
+      return
+    }
+
+    if(!dueDate) {
+      setDateError(true)
+      return
+    }
+
+    if(!category) {
+      setcategoryError(true)
+      return
+    }
+
+    if(!reoccuring) {
+      setReoccuringError(true)
+      return
+    }
+
+    if(!name) {
+      setNameError(true)
+      return
+    }
+
+    // fetch to submit info to database
     fetch(`http://localhost:3000/expense/add`, {
       method: "POST",
       body: JSON.stringify({
@@ -119,6 +142,11 @@ const ExpAdd = (props) => {
     })
       .then((res) => res.json())
       .then(handleClickOpen);
+      setAmountError(false);
+      setNameError(false);
+      setDateError(false);
+      setReoccuringError(false);
+      setNameError(false);
   };
 
   // Dialog box
@@ -133,6 +161,35 @@ const ExpAdd = (props) => {
   };
 
   return (
+
+    <form>
+      <h1
+        style={{ display: "flex", justifyContent: "center", color: "#6ccff6" }}
+      >
+        EXPENSES
+      </h1>
+      <Grid
+        container
+        spacing={3}
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Grid item container>
+          <Grid item sm={2} />
+          <Grid item sm={1}>
+            {/* category dropdown list */}
+            <FormControl className={classes.formControl}>
+              <InputLabel id="ddlExpCat">Category</InputLabel>
+              <Select
+                labelId="ddlExpCat"
+                id="ddlExpCat"
+                value={category}
+                onChange={updateCategory}
+                required="true"
+                error={categoryError}
+                helperText=""
+
     <div className={classes.root}>
       <form>
         <Grid container spacing={3} direction="row">
@@ -153,11 +210,50 @@ const ExpAdd = (props) => {
                   justifyContent: "center",
                   color: "#6ccff6",
                 }}
+
               >
                 EXPENSES
               </h1>
             </Grid>
           </Grid>
+
+
+          <Grid item sm={2} />
+          <Grid item sm={1}>
+            {/* Recurring payment dropdown list  */}
+            <FormControl className={classes.formControl}>
+              <InputLabel id="ddlExpRec">Frequency</InputLabel>
+              <Select
+                labelId="ddlExpRec"
+                id="ddlExpRec"
+                value={reoccuring}
+                onChange={updateReoccuring}
+                required="true"
+                error={reoccuringError}
+                helperText=""
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={true}>Recurring</MenuItem>
+                <MenuItem value={false}>Non-Recurring</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item sm={9} />
+          <Divider />
+          <Grid item sm={2} />
+          <Grid item sm={3}>
+            {/* vendor name input */}
+            <TextField
+              id="txtName"
+              label="payee"
+              variant="standard"
+              onChange={updateName}
+              required="true"
+              error={nameError}
+              helperText=""
+            />
 
           <Grid
             item
@@ -202,7 +298,22 @@ const ExpAdd = (props) => {
                 </Select>
               </FormControl>
             </Paper>
+
           </Grid>
+
+
+          <Grid item sm={2} />
+          <Grid item sm={1}>
+            {/* amount input */}
+            <TextField
+              id="txtAmount"
+              label="Amount"
+              variant="standard"
+              onChange={updateAmount}
+              required="true"
+              error={amountError}
+              helperText="The payment amount is required"
+            />
 
           <Grid item xs={2}>
             <Paper className={classes.paper}>
@@ -224,6 +335,7 @@ const ExpAdd = (props) => {
                 </Select>
               </FormControl>
             </Paper>
+
           </Grid>
 
           <Grid item xs={4} />
@@ -241,6 +353,29 @@ const ExpAdd = (props) => {
               />
             </Paper>
           </Grid>
+
+          <Grid item sm={9} />
+          <Divider />
+          <Grid item sm={2} />
+          <Grid item sm={2}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                variant="outlined"
+                margin="normal"
+                name="dpDueDate"
+                id="dpDueDate"
+                format="MM/dd/yyyy"
+                label="Date"
+                clearable
+                value={dueDate}
+                onChange={updateDueDate}
+                required="true"
+                error={dateError}
+                helperText=""
+                KeyboardButtonProps={{
+                  "aria-label": "change date",
+                }}
+
           <Grid item xs={2}>
             <Paper className={classes.paper}>
               {/* amount input */}
@@ -249,6 +384,7 @@ const ExpAdd = (props) => {
                 label="Payment Amount"
                 variant="standard"
                 onChange={updateAmount}
+
               />
             </Paper>
           </Grid>

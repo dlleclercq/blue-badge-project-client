@@ -19,8 +19,7 @@ import PrimarySearchAppBar from "./components/Navs/HomeNav";
 // import ExpAdd from "./components/expenses/ExpAdd";
 import PageNotFound from "./components/PageNotFound";
 import Upcoming from "./components/upcoming/Upcoming";
-// import ExpenseTable from "./components/ViewAll/ViewAll"
-=======
+// import ExpenseTable from "./components/ViewAll/ViewAll
 
 
 
@@ -96,6 +95,7 @@ function App() {
     console.log(sessionToken);
   };
 
+
   // const clearToken = () => {
   //   localStorage.clear();
   //   setSessionToken("");
@@ -133,6 +133,7 @@ function App() {
         </ThemeProvider>
       </div>
     </Router>
+
   );
 }
 

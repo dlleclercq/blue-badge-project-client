@@ -35,23 +35,16 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
+    margin: theme.spacing(0),
+    minWidth: 200,
   },
   selectEmpty: {
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(1),
   },
-  // root: {
-  //   flexGrow: 1,
-  // },
   paper: {
     padding: theme.spacing(0.5),
-    textAlign: "center",
-    justifyContent: "center",
-    // color: "#6ccff6",
-    // fontWeight: "bold",
-    backgroundColor: "#5E0035",
-    // opacity: 0.99,
+    backgroundColor: "#6ccff6",
+    opacity: 0.8,
   },
 }));
 
@@ -152,13 +145,12 @@ const ExpAdd = (props) => {
                 alt="iSpend Logo"
               />
             </Grid>
-            <Grid item xs={11} />
-            <Grid item xs={1} />
-            <Grid item xs={11}>
+            <Grid item xs={4} />
+            <Grid item xs={2}>
               <h1
                 style={{
                   display: "flex",
-                  justifyContent: "left",
+                  justifyContent: "center",
                   color: "#6ccff6",
                 }}
               >
@@ -170,7 +162,11 @@ const ExpAdd = (props) => {
           <Grid
             item
             container
-            style={{ justifyContent: "center", marginTop: "5px" }}
+            style={{
+              justifyContent: "center",
+              marginTop: "5px",
+              border: "1px solid #6ccff6",
+            }}
           >
             <Paper className={classes.paper}>
               <Chart />
@@ -218,7 +214,7 @@ const ExpAdd = (props) => {
                   id="ddlExpRec"
                   value={reoccuring}
                   onChange={updateReoccuring}
-                  disableUnderline="false"
+                  disableUnderline="true"
                 >
                   <MenuItem value="">
                     <em>None</em>
@@ -265,16 +261,13 @@ const ExpAdd = (props) => {
             <Paper className={classes.paper}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
-                  inputVariant="standard"
-                  variant="dialog"
                   margin="normal"
                   id="dpDueDate"
                   format="MM/dd/yyyy"
                   label="Due Date"
                   helperText=""
                   disablePast="true"
-                  disableToolbar="true"
-                  clearable
+                  // disableToolbar="true"
                   value={dueDate}
                   onChange={updateDueDate}
                   KeyboardButtonProps={{

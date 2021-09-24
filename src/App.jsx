@@ -93,7 +93,7 @@ function App() {
               <Auth updateToken={updateToken} />
             </Route>
             <Route exact path="/HomeNav" component={HomeNav} />
-            <Route exact path="/ExpAdd">
+            <Route exact path="/ExpSplash">
               <ExpSplash token={sessionToken} />
               <ExpAdd token={sessionToken} />
               {/* <ExpEdit token={sessionToken} /> */}

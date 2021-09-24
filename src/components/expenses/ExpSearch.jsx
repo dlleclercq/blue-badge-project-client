@@ -9,6 +9,10 @@ import { isPropertySignature } from "typescript";
 import { ContentPasteOutlined } from "@mui/icons-material";
 
 const ExpSearch = (props) => {
+  const [raw, setRaw] = useState([]);
+  // const [filtered, setFiltered] = useState(Object.assign(raw));
+  // let searchResults = [...raw];
+
 
     // need to push 
 
@@ -63,3 +67,7 @@ const ExpSearch = (props) => {
 } // end FC
  
 export default ExpSearch;
+
+  
+
+

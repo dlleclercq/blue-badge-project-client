@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import Chart from "../chart/Chart";
 import { makeStyles } from "@material-ui/core/styles";
-import { Divider } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 
 // drop down list imports
 import InputLabel from "@material-ui/core/InputLabel";
@@ -34,11 +35,16 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
+    margin: theme.spacing(0),
+    minWidth: 200,
   },
   selectEmpty: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(1),
+  },
+  paper: {
+    padding: theme.spacing(0.5),
+    backgroundColor: "#6ccff6",
+    opacity: 0.8,
   },
 }));
 
@@ -155,6 +161,7 @@ const ExpAdd = (props) => {
   };
 
   return (
+
     <form>
       <h1
         style={{ display: "flex", justifyContent: "center", color: "#6ccff6" }}
@@ -182,22 +189,34 @@ const ExpAdd = (props) => {
                 required="true"
                 error={categoryError}
                 helperText=""
+
+    <div className={classes.root}>
+      <form>
+        <Grid container spacing={3} direction="row">
+          <Grid item container style={{ borderBottom: "1px solid #757780" }}>
+            <Grid item xs={1}>
+              <img
+                src="./assets/iSpendLogo.png"
+                height="45"
+                width="45"
+                alt="iSpend Logo"
+              />
+            </Grid>
+            <Grid item xs={4} />
+            <Grid item xs={2}>
+              <h1
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  color: "#6ccff6",
+                }}
+
               >
-                <MenuItem value={"Restaurant"}>Restaurant</MenuItem>
-                <MenuItem value={"Food"}>Food</MenuItem>
-                <MenuItem value={"Electric"}>Electric</MenuItem>
-                <MenuItem value={"Gas"}>Gas</MenuItem>
-                <MenuItem value={"Water"}>Water</MenuItem>
-                <MenuItem value={"Childcare"}>Childcare</MenuItem>
-                <MenuItem value={"Health"}>Health</MenuItem>
-                <MenuItem value={"Beauty"}>Beauty</MenuItem>
-                <MenuItem value={"Other"}>Other</MenuItem>
-              </Select>
-            </FormControl>
+                EXPENSES
+              </h1>
+            </Grid>
           </Grid>
-          <Grid item sm={9} />
-          <Divider />
-          <Divider />
+
 
           <Grid item sm={2} />
           <Grid item sm={1}>
@@ -235,9 +254,53 @@ const ExpAdd = (props) => {
               error={nameError}
               helperText=""
             />
+
+          <Grid
+            item
+            container
+            style={{
+              justifyContent: "center",
+              marginTop: "5px",
+              border: "1px solid #6ccff6",
+            }}
+          >
+            <Paper className={classes.paper}>
+              <Chart />
+            </Paper>
           </Grid>
-          <Grid item sm={7} />
-          <Divider />
+
+          <Grid item xs={4} />
+
+          <Grid item xs={2}>
+            <Paper className={classes.paper}>
+              {/* category dropdown list */}
+              <FormControl className={classes.formControl}>
+                <InputLabel id="ddlExpCat">Category</InputLabel>
+                <Select
+                  labelId="ddlExpCat"
+                  id="ddlExpCat"
+                  disableUnderline="true"
+                  value={category}
+                  onChange={updateCategory}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={"Restaurant"}>Restaurant</MenuItem>
+                  <MenuItem value={"Food"}>Food</MenuItem>
+                  <MenuItem value={"Electric"}>Electric</MenuItem>
+                  <MenuItem value={"Gas"}>Gas</MenuItem>
+                  <MenuItem value={"Water"}>Water</MenuItem>
+                  <MenuItem value={"Childcare"}>Childcare</MenuItem>
+                  <MenuItem value={"Health"}>Health</MenuItem>
+                  <MenuItem value={"Beauty"}>Beauty</MenuItem>
+                  <MenuItem value={"Other"}>Other</MenuItem>
+                </Select>
+              </FormControl>
+            </Paper>
+
+          </Grid>
+
 
           <Grid item sm={2} />
           <Grid item sm={1}>
@@ -251,13 +314,46 @@ const ExpAdd = (props) => {
               error={amountError}
               helperText="The payment amount is required"
             />
+
+          <Grid item xs={2}>
+            <Paper className={classes.paper}>
+              {/* Recurring payment dropdown list  */}
+              <FormControl className={classes.formControl}>
+                <InputLabel id="ddlExpRec">Frequency</InputLabel>
+                <Select
+                  labelId="ddlExpRec"
+                  id="ddlExpRec"
+                  value={reoccuring}
+                  onChange={updateReoccuring}
+                  disableUnderline="true"
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={true}>Recurring</MenuItem>
+                  <MenuItem value={false}>Non-Recurring</MenuItem>
+                </Select>
+              </FormControl>
+            </Paper>
+
           </Grid>
-          <Grid item sm={9} />
-          <Divider />
-          <Grid item sm={2} />
-          <Grid item sm={1}>
-            {/* Left blank intentionally to allow space for date field */}
+
+          <Grid item xs={4} />
+
+          <Grid item xs={4} />
+
+          <Grid item xs={2}>
+            <Paper className={classes.paper}>
+              {/* vendor name input */}
+              <TextField
+                id="txtName"
+                label="Vendor"
+                variant="standard"
+                onChange={updateName}
+              />
+            </Paper>
           </Grid>
+
           <Grid item sm={9} />
           <Divider />
           <Grid item sm={2} />
@@ -279,23 +375,61 @@ const ExpAdd = (props) => {
                 KeyboardButtonProps={{
                   "aria-label": "change date",
                 }}
+
+          <Grid item xs={2}>
+            <Paper className={classes.paper}>
+              {/* amount input */}
+              <TextField
+                id="txtAmount"
+                label="Payment Amount"
+                variant="standard"
+                onChange={updateAmount}
+
               />
-            </MuiPickersUtilsProvider>
+            </Paper>
           </Grid>
-          <Grid item sm={8} />
-          <Divider />
-          <Grid item sm={2} />
-          <Divider />
-          <Grid item sm={2}>
-            <Button variant="contained" color="secondary" onClick={addExpense}>
-              Add Expense
-            </Button>
-            <Button variant="contained" color="secondary" onClick={clearForm}>
-              Clear
-            </Button>
+
+          <Grid item xs={4} />
+
+          <Grid item xs={5} />
+
+          <Grid item xs={2}>
+            <Paper className={classes.paper}>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  margin="normal"
+                  id="dpDueDate"
+                  format="MM/dd/yyyy"
+                  label="Due Date"
+                  helperText=""
+                  disablePast="true"
+                  // disableToolbar="true"
+                  value={dueDate}
+                  onChange={updateDueDate}
+                  KeyboardButtonProps={{
+                    "aria-label": "change date",
+                  }}
+                />
+              </MuiPickersUtilsProvider>
+            </Paper>
+          </Grid>
+
+          <Grid item xs={5} />
+
+          <Grid item xs={5} />
+
+          <Grid item xs={2}>
+            <Paper style={{ backgroundColor: "#020202" }}>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={addExpense}
+              >
+                Add Expense
+              </Button>
+            </Paper>
           </Grid>
           <Grid item sm={2} />
-          <Divider />
           <Grid item sm={2} />
           <Grid item sm={1}>
             {/* err/succ msg */}
@@ -322,10 +456,9 @@ const ExpAdd = (props) => {
             </Dialog>
           </Grid>
           <Grid item sm={9} />
-          <Divider />
         </Grid>
-      </Grid>
-    </form>
+      </form>
+    </div>
   );
 };
 

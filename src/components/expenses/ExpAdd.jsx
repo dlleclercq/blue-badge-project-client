@@ -301,7 +301,6 @@ const ExpAdd = (props) => {
             </Paper>
           </Grid>
           <Grid item sm={2} />
-          <Divider />
           <Grid item sm={2} />
           <Grid item sm={1}>
             {/* err/succ msg */}
@@ -328,7 +327,6 @@ const ExpAdd = (props) => {
             </Dialog>
           </Grid>
           <Grid item sm={9} />
-          <Divider />
         </Grid>
       </form>
     </div>

@@ -26,7 +26,8 @@ const Signup = (props) => {
   };
 
   const handleSubmit = (e) => {
-    debugger;
+    if (!email || !password) return;
+
     e.preventDefault();
     fetch("http://localhost:3000/user/signup", {
       method: "POST",

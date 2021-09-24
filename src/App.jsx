@@ -13,6 +13,7 @@ import Chart from "./components/chart/Chart";
 import ExpSearch from "./components/expenses/ExpSearch";
 // import Upcoming from "./components/upcoming/Upcoming";
 import "./App.css";
+import ExpEdit from "./components/expenses/ExpEdit";
 
 //teal = #6CCFF6
 //purple = #5E0035
@@ -95,10 +96,11 @@ function App() {
       <ThemeProvider theme={customTheme}>
         <ExpSplash token={sessionToken} />
         <Auth updateToken={updateToken} />
-        <Landing />
+        {/* <Landing /> */}
         <ExpAdd token={sessionToken} />
-        <ExpSearch token={sessionToken} /> 
-        <Chart />
+        {/* <ExpSearch token={sessionToken} /> 
+        <ExpEdit token={sessionToken} />
+        <Chart /> */}
         {/* <Upcoming /> */}
       </ThemeProvider>
     </div>

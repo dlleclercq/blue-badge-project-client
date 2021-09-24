@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -31,7 +30,15 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 // import add view all page
 
+  
 const ExpEdit = (props) => {
+
+  const [category, setCategory] = useState("");
+  const [name, setName] = useState("");
+  const [amount, setAmount] = useState("");
+  const [dueDate, setDueDate] = useState("");
+  const [reoccuring, setReoccuring] = React.useState(false);
+
   /***********************
       *** Edit EXpense ***
       This function will be passed down as props for use on view all page buttons
@@ -97,6 +104,8 @@ const ExpEdit = (props) => {
   };
 
   return (
+    <div>
+      <h1>Delete</h1>
     <Modal isOpen={true}>
       <ModalHeader>Update an Expense</ModalHeader>
       <ModalBody>
@@ -193,6 +202,7 @@ const ExpEdit = (props) => {
         </Form>
       </ModalBody>
     </Modal>
+    </div>
   );
 };
 

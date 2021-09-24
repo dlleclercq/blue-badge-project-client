@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// adding comments to facilitate new push.
 import { makeStyles } from "@material-ui/core/styles";
 import { Divider } from "@material-ui/core";
 

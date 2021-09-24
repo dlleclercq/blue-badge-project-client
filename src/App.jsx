@@ -102,7 +102,6 @@ function App() {
             <Route exact path="/">
               <Auth updateToken={updateToken} />
             </Route>
-            <Route exact path="/HomeNav" component={HomeNav} />
 
             <Route exact path="/ExpSplash">
               <ExpSplash token={sessionToken} />
@@ -112,6 +111,7 @@ function App() {
               <ExpSearch token={sessionToken} />
               <ExpDel token={sessionToken} />
             </Route>
+            <Route exact path="/HomeNav" component={HomeNav} />
             <Route exact path="*" component={PageNotFound} />
           </Switch>
         </ThemeProvider>

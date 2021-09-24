@@ -25,6 +25,7 @@ import ExpDel from "./components/expenses/ExpDel";
 import ExpEdit from "./components/expenses/ExpEdit";
 
 import "./App.css";
+import ExpEdit from "./components/expenses/ExpEdit";
 
 //teal = #6CCFF6
 //purple = #5E0035
@@ -89,6 +90,7 @@ function App() {
     console.log(sessionToken);
   };
 
+
   // const clearToken = () => {
   //   localStorage.clear();
   //   setSessionToken("");
@@ -117,6 +119,7 @@ function App() {
         </ThemeProvider>
       </div>
     </Router>
+
   );
 }
 

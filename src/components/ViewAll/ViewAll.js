@@ -1,28 +1,28 @@
-import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types';
-import { alpha } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
-import { visuallyHidden } from '@mui/utils';
-import { useForkRef } from '@mui/material';
-import { CheckBox } from '@mui/icons-material';
-
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { alpha } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
+import TableSortLabel from "@mui/material/TableSortLabel";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
+import DeleteIcon from "@mui/icons-material/Delete";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import { visuallyHidden } from "@mui/utils";
+import { useForkRef } from "@mui/material";
+import { CheckBox } from "@mui/icons-material";
+import { Button } from "@material-ui/core";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -35,7 +35,7 @@ function descendingComparator(a, b, orderBy) {
 }
 
 function getComparator(order, orderBy) {
-  return order === 'desc'
+  return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
@@ -56,40 +56,39 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'name',
+    id: "name",
     numeric: false,
     disablePadding: false,
-    label: 'Name',
+    label: "Name",
   },
   {
-    id: 'category',
+    id: "category",
     numeric: false,
     disablePadding: false,
-    label: 'Category',
+    label: "Category",
   },
   {
-    id: 'amount',
+    id: "amount",
     numeric: true,
     disablePadding: false,
-    label: 'Amount',
+    label: "Amount",
   },
   {
-    id: 'dueDate',
+    id: "dueDate",
     numeric: false,
     disablePadding: false,
-    label: 'Due Date',
+    label: "Due Date",
   },
   {
-    id: 'reoccuring',
+    id: "reoccuring",
     numeric: false,
     disablePadding: false,
-    label: 'Reoccuring',
+    label: "Reoccuring",
   },
 ];
 
 function EnhancedTableHead(props) {
-  const {order, orderBy, numSelected, rowCount, onRequestSort } =
-    props;
+  const { order, orderBy, numSelected, rowCount, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -100,9 +99,9 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            padding={headCell.disablePadding ? 'none' : 'normal'}
+            padding={headCell.disablePadding ? "none" : "normal"}
           >
-              {headCell.label}
+            {headCell.label}
           </TableCell>
         ))}
       </TableRow>
@@ -112,29 +111,28 @@ function EnhancedTableHead(props) {
 
 EnhancedTableHead.propTypes = {
   onRequestSort: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+  order: PropTypes.oneOf(["asc", "desc"]).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
 };
 
 export default function ExpenseTable(props) {
-
   const getExpense = () => {
     console.log(props);
-    if(!props.token) return
-    fetch('http://localhost:3000/expense/all', {
-      method: 'GET',
+    if (!props.token) return;
+    fetch("http://localhost:3000/expense/all", {
+      method: "GET",
       headers: new Headers({
-        'Content-Type': 'application/json',
-        'Authorization': props.token
-      })
-    }) .then(response => response.json())
-    .then((data) => setRows(data))
+        "Content-Type": "application/json",
+        Authorization: props.token,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => setRows(data));
   };
 
-
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('amount');
+  const [order, setOrder] = React.useState("asc");
+  const [orderBy, setOrderBy] = React.useState("amount");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -142,15 +140,15 @@ export default function ExpenseTable(props) {
   const [rows, setRows] = React.useState([]);
 
   useEffect(() => {
-    getExpense()
-  }, [props.token])
+    getExpense();
+  }, [props.token]);
   useEffect(() => {
-    console.log(rows)
-  }, [rows])
+    console.log(rows);
+  }, [rows]);
 
   const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
 
@@ -176,7 +174,7 @@ export default function ExpenseTable(props) {
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
+        selected.slice(selectedIndex + 1)
       );
     }
 
@@ -203,13 +201,13 @@ export default function ExpenseTable(props) {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
+    <Box sx={{ width: "100%" }}>
+      <Paper sx={{ width: "100%", mb: 2 }}>
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
+            size={dense ? "small" : "medium"}
           >
             <EnhancedTableHead
               numSelected={selected.length}
@@ -240,7 +238,13 @@ export default function ExpenseTable(props) {
                       <TableCell align="left">$ {row?.amount}</TableCell>
                       <TableCell align="left">{row?.dueDate}</TableCell>
                       <TableCell align="left">
-                      {row.reoccuring=false ? <CheckBox disabled color="primary"/> : <CheckBox color="primary" />}
+                        {
+                          (row.reoccuring = false ? (
+                            <CheckBox disabled color="primary" />
+                          ) : (
+                            <CheckBox color="primary" />
+                          ))
+                        }
                       </TableCell>
                     </TableRow>
                   );
@@ -271,6 +275,45 @@ export default function ExpenseTable(props) {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
+      {/* <form>
+      <Button variant="contained" color="secondary" onClick={handleClickOpen}>
+        Signup
+      </Button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">Signup</DialogTitle>
+        <DialogContent>
+          <DialogContentText color="primary">
+            To join iSpend, please enter the following:
+          </DialogContentText>
+
+          <form noValidate autoComplete="off">
+            <TextField
+              autoFocus
+              margin="dense"
+              id="email"
+              label="Email Address"
+              type="email"
+              input
+              onChange={(e) => setEmail(e.target.value)}
+              fullWidth
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="passwordhash"
+              label="Password"
+              type="password"
+              input
+              onChange={(e) => setPassword(e.target.value)}
+              fullWidth
+            />
+          </form>
+        </DialogContent>
+        </form> */}
     </Box>
   );
 }

@@ -9,7 +9,7 @@ import HomeNav from "./components/Navs/HomeNav";
 import ExpSplash from "./components/expenses/ExpSplash";
 import ButtonAppBar from "./components/Navs/LandingNav";
 import ButtonAppBarA from "./components/Navs/HomeNav";
-import ExpenseTable from './components/ViewAll/ViewAll';
+import ExpenseTable from "./components/ViewAll/ViewAll";
 import Landing from "./components/landing/Landing";
 import ExpAdd from "./components/expenses/ExpAdd";
 import Chart from "./components/chart/Chart";
@@ -19,16 +19,10 @@ import PrimarySearchAppBar from "./components/Navs/HomeNav";
 // import ExpAdd from "./components/expenses/ExpAdd";
 import PageNotFound from "./components/PageNotFound";
 import Upcoming from "./components/upcoming/Upcoming";
-// import ExpenseTable from "./components/ViewAll/ViewAll
-
-
-
-
 
 import ExpDel from "./components/expenses/ExpDel";
 
 import ExpEdit from "./components/expenses/ExpEdit";
-
 
 import "./App.css";
 
@@ -95,7 +89,6 @@ function App() {
     console.log(sessionToken);
   };
 
-
   // const clearToken = () => {
   //   localStorage.clear();
   //   setSessionToken("");
@@ -111,29 +104,19 @@ function App() {
             </Route>
             <Route exact path="/HomeNav" component={HomeNav} />
 
-            
-
             <Route exact path="/ExpSplash">
               <ExpSplash token={sessionToken} />
-
               <ExpAdd token={sessionToken} />
               {/* <ExpEdit token={sessionToken} /> */}
+              <ExpenseTable token={sessionToken} />
               <ExpSearch token={sessionToken} />
               <ExpDel token={sessionToken} />
             </Route>
             <Route exact path="*" component={PageNotFound} />
-
-          <ExpenseTable token={sessionToken} />
+          </Switch>
         </ThemeProvider>
       </div>
     </Router>
-  )}
-
-          
-        </ThemeProvider>
-      </div>
-    </Router>
-
   );
 }
 

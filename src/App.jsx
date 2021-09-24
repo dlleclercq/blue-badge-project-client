@@ -1,17 +1,29 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@material-ui/core";
 import Auth from "./components/auth/Auth";
+import HomeNav from "./components/Navs/HomeNav";
+
 // import { PinDropSharp } from '@material-ui/icons';
 import ExpSplash from "./components/expenses/ExpSplash";
 import ButtonAppBar from "./components/Navs/LandingNav";
 import ButtonAppBarA from "./components/Navs/HomeNav";
-import EnhancedTable from './components/ViewAll/ViewAll';
+import ExpenseTable from "./components/ViewAll/ViewAll";
 import Landing from "./components/landing/Landing";
 import ExpAdd from "./components/expenses/ExpAdd";
 import Chart from "./components/chart/Chart";
 import ExpSearch from "./components/expenses/ExpSearch";
 // import Upcoming from "./components/upcoming/Upcoming";
+import PrimarySearchAppBar from "./components/Navs/HomeNav";
+// import ExpAdd from "./components/expenses/ExpAdd";
+import PageNotFound from "./components/PageNotFound";
+import Upcoming from "./components/upcoming/Upcoming";
+
+import ExpDel from "./components/expenses/ExpDel";
+
+import ExpEdit from "./components/expenses/ExpEdit";
+
 import "./App.css";
 import ExpEdit from "./components/expenses/ExpEdit";
 
@@ -37,13 +49,7 @@ const customTheme = createTheme({
   },
 
   typography: {
-    h1: { color: "#6CCFF6", fontWeight: "bold" },
-    h2: { color: "#6CCFF6", fontWeight: "bold" },
-    h3: { color: "#6CCFF6", fontWeight: "bold" },
-    h4: { color: "#6CCFF6", fontWeight: "bold" },
-    h5: { color: "#6CCFF6", fontWeight: "bold" },
-    h6: { color: "#6CCFF6", fontWeight: "bold" },
-    body1: { color: "#6CCFF6" },
+    body1: { color: "#020202", fontWeight: "bold" },
   },
 
   overrides: {
@@ -55,22 +61,15 @@ const customTheme = createTheme({
     },
     MuiSelect: {
       select: {
-        color: "#6CCFF6",
+        color: "#020202",
       },
       icon: {
-        color: "#6ccff6",
-      },
-    },
-    MuiInputBase: {
-      formControl: {
-        underline: {
-          color: "#6ccff6",
-        },
+        color: "#020202",
       },
     },
     MuiInput: {
       underline: {
-        color: "#6ccff6",
+        color: "#020202",
       },
     },
   },
@@ -91,19 +90,36 @@ function App() {
     console.log(sessionToken);
   };
 
-  return (    
-    <div>      
-      <ThemeProvider theme={customTheme}>
-        <ExpSplash token={sessionToken} />
-        <Auth updateToken={updateToken} />
-        {/* <Landing /> */}
-        <ExpAdd token={sessionToken} />
-        {/* <ExpSearch token={sessionToken} /> 
-        <ExpEdit token={sessionToken} />
-        <Chart /> */}
-        {/* <Upcoming /> */}
-      </ThemeProvider>
-    </div>
+
+  // const clearToken = () => {
+  //   localStorage.clear();
+  //   setSessionToken("");
+  // };
+
+  return (
+    <Router>
+      <div>
+        <ThemeProvider theme={customTheme}>
+          <Switch>
+            <Route exact path="/">
+              <Auth updateToken={updateToken} />
+            </Route>
+
+            <Route exact path="/ExpSplash">
+              <ExpSplash token={sessionToken} />
+              <ExpAdd token={sessionToken} />
+              {/* <ExpEdit token={sessionToken} /> */}
+              <ExpenseTable token={sessionToken} />
+              <ExpSearch token={sessionToken} />
+              <ExpDel token={sessionToken} />
+            </Route>
+            <Route exact path="/HomeNav" component={HomeNav} />
+            <Route exact path="*" component={PageNotFound} />
+          </Switch>
+        </ThemeProvider>
+      </div>
+    </Router>
+
   );
 }
 

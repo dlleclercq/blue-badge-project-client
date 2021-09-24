@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+
 import {
   Button,
   TextField,
@@ -10,6 +12,7 @@ import {
 } from "@material-ui/core";
 
 const Signup = (props) => {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false);
@@ -23,6 +26,8 @@ const Signup = (props) => {
   };
 
   const handleSubmit = (e) => {
+    if (!email || !password) return;
+
     e.preventDefault();
     fetch("http://localhost:3000/user/signup", {
       method: "POST",
@@ -35,9 +40,14 @@ const Signup = (props) => {
     })
       .then((response) => response.json())
       .then((data) => {
+        handleClick();
         props.updateToken(data.sessionToken);
       });
   };
+
+  function handleClick() {
+    history.push("/ExpSplash");
+  }
 
   return (
     <div>
@@ -84,7 +94,7 @@ const Signup = (props) => {
             <Button onClick={handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={handleClose} type="submit" color="primary">
+            <Button onClick={handleSubmit} color="primary">
               Signup
             </Button>
           </form>

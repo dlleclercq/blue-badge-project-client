@@ -1,38 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { Pie } from "react-chartjs-2";
 
 const Chart = () => {
+  // const [data, setData] = useState("");
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: "#020202",
+      }}
+    >
       <Pie
         data={{
           labels: [
-            "Red",
-            "Blue",
-            "Yellow",
-            "Green",
-            "Purple",
-            "Orange",
-            "Turqouise",
-            "Pink",
-            "Violet",
+            "Restaurant",
+            "Food",
+            "Electric",
+            "Gas",
+            "Water",
+            "Childcare",
+            "Health",
+            "Beauty",
+            "Other",
           ],
           datasets: [
             {
               label: "Totals",
-              data: [12, 40, 85, 36, 21, 77, 92, 76, 39],
+              data: [11, 11, 11, 11, 11, 11, 11, 11, 12],
               options: {
-                responsive: true,
+                animation: true,
                 plugins: {
                   legend: {
-                    position: "right",
-                  },
-                  title: {
-                    display: true,
-                    text: "Our Chart",
+                    display: false,
                   },
                 },
               },
+              borderColor: ["#020202"],
+
               backgroundColor: [
                 "rgba(157, 2, 8)",
                 "rgba(0, 0, 188)",
@@ -44,7 +47,7 @@ const Chart = () => {
                 "rgba(255, 175, 204)",
                 "rgba(60, 9, 108)",
               ],
-              radius: 400,
+              radius: 100,
             },
           ],
         }}

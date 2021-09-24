@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import {
   Button,
   TextField,
@@ -10,6 +11,7 @@ import {
 } from "@material-ui/core";
 
 const Login = (props) => {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false);
@@ -35,9 +37,14 @@ const Login = (props) => {
     })
       .then((response) => response.json())
       .then((data) => {
+        handleClick();
         props.updateToken(data.sessionToken);
       });
   };
+
+  function handleClick() {
+    history.push("/HomeNav");
+  }
 
   return (
     <div>
@@ -51,7 +58,7 @@ const Login = (props) => {
       >
         <DialogTitle id="form-dialog-title">Login</DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText color="primary">
             To login to iSpend, please enter the following:
           </DialogContentText>
 
@@ -85,7 +92,7 @@ const Login = (props) => {
             <Button onClick={handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={handleClose} type="submit" color="primary">
+            <Button onClick={handleSubmit} type="submit" color="primary">
               Login
             </Button>
           </form>

@@ -88,7 +88,7 @@ const ExpAdd = (props) => {
     setReoccuring(e.target.value);
   };
 
-  // fetch to submit info to database
+  // validate input form return section
   let addExpense = (e) => {
     e.preventDefault();
 
@@ -117,6 +117,7 @@ const ExpAdd = (props) => {
       return
     }
 
+    // fetch to submit info to database
     fetch(`http://localhost:3000/expense/add`, {
       method: "POST",
       body: JSON.stringify({

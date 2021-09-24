@@ -4,15 +4,32 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@material-ui/core";
 import Auth from "./components/auth/Auth";
 import HomeNav from "./components/Navs/HomeNav";
-// import Landing from "./components/landing/Landing";
-import PageNotFound from "./components/PageNotFound";
-// import Upcoming from "./components/upcoming/Upcoming";
 
-import ExpAdd from "./components/expenses/ExpAdd";
+// import { PinDropSharp } from '@material-ui/icons';
 import ExpSplash from "./components/expenses/ExpSplash";
-import ExpDel from "./components/expenses/ExpDel";
+import ButtonAppBar from "./components/Navs/LandingNav";
+import ButtonAppBarA from "./components/Navs/HomeNav";
+import ExpenseTable from './components/ViewAll/ViewAll';
+import Landing from "./components/landing/Landing";
+import ExpAdd from "./components/expenses/ExpAdd";
+import Chart from "./components/chart/Chart";
 import ExpSearch from "./components/expenses/ExpSearch";
+// import Upcoming from "./components/upcoming/Upcoming";
+import PrimarySearchAppBar from "./components/Navs/HomeNav";
+// import ExpAdd from "./components/expenses/ExpAdd";
+import PageNotFound from "./components/PageNotFound";
+import Upcoming from "./components/upcoming/Upcoming";
+// import ExpenseTable from "./components/ViewAll/ViewAll"
+=======
+
+
+
+
+
+import ExpDel from "./components/expenses/ExpDel";
+
 import ExpEdit from "./components/expenses/ExpEdit";
+
 
 import "./App.css";
 
@@ -93,21 +110,26 @@ function App() {
               <Auth updateToken={updateToken} />
             </Route>
             <Route exact path="/HomeNav" component={HomeNav} />
+
+            
+
             <Route exact path="/ExpSplash">
               <ExpSplash token={sessionToken} />
+
               <ExpAdd token={sessionToken} />
               {/* <ExpEdit token={sessionToken} /> */}
               <ExpSearch token={sessionToken} />
               <ExpDel token={sessionToken} />
             </Route>
             <Route exact path="*" component={PageNotFound} />
-          </Switch>
-          {/* <ExpSplash />
-        <ExpDel />
-        <ExpEdit />
-        <ExpSearch />
-        <HomeNav />
-          {/* <Upcoming /> */}
+
+          <ExpenseTable token={sessionToken} />
+        </ThemeProvider>
+      </div>
+    </Router>
+  )}
+
+          
         </ThemeProvider>
       </div>
     </Router>

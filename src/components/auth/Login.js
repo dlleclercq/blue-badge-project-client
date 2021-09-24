@@ -25,6 +25,8 @@ const Login = (props) => {
   };
 
   const handleSubmit = (e) => {
+    if (!email || !password) return;
+
     e.preventDefault();
     fetch("http://localhost:3000/user/login", {
       method: "POST",

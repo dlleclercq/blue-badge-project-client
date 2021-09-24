@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@material-ui/core";
 import Auth from "./components/auth/Auth";
 import HomeNav from "./components/Navs/HomeNav";
+
 // import { PinDropSharp } from '@material-ui/icons';
 import ExpSplash from "./components/expenses/ExpSplash";
 import ButtonAppBar from "./components/Navs/LandingNav";
@@ -19,6 +20,16 @@ import PrimarySearchAppBar from "./components/Navs/HomeNav";
 import PageNotFound from "./components/PageNotFound";
 import Upcoming from "./components/upcoming/Upcoming";
 // import ExpenseTable from "./components/ViewAll/ViewAll"
+=======
+
+
+
+
+
+import ExpDel from "./components/expenses/ExpDel";
+
+import ExpEdit from "./components/expenses/ExpEdit";
+
 
 import "./App.css";
 
@@ -99,15 +110,30 @@ function App() {
               <Auth updateToken={updateToken} />
             </Route>
             <Route exact path="/HomeNav" component={HomeNav} />
-            <Route exact path="/ExpAdd">
-                      <ExpSplash token={sessionToken} />
+
+            
+
+            <Route exact path="/ExpSplash">
+              <ExpSplash token={sessionToken} />
+
               <ExpAdd token={sessionToken} />
+              {/* <ExpEdit token={sessionToken} /> */}
+              <ExpSearch token={sessionToken} />
+              <ExpDel token={sessionToken} />
             </Route>
             <Route exact path="*" component={PageNotFound} />
-          </Switch>
+
           <ExpenseTable token={sessionToken} />
         </ThemeProvider>
       </div>
     </Router>
   )}
+
+          
+        </ThemeProvider>
+      </div>
+    </Router>
+  );
+}
+
 export default App;

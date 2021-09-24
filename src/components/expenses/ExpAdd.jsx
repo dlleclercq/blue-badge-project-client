@@ -51,6 +51,11 @@ const ExpAdd = (props) => {
   const [amount, setAmount] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [reoccuring, setReoccuring] = React.useState(false);
+  const [amountError, setAmountError] = useState(false);
+  const [nameError, setNameError] = useState(false);
+  const [dateError, setDateError] = useState(false);
+  const [categoryError, setcategoryError] = useState(false);
+  const [reoccuringError, setReoccuringError] = useState(false);
 
   // function to clear values after fetch
   const clearForm = () => {
@@ -83,17 +88,34 @@ const ExpAdd = (props) => {
     setReoccuring(e.target.value);
   };
 
-  // declare variable to hold error message
-  let errors = {
-    category: "",
-    name: "",
-    amount: "",
-    dueDate: "",
-  };
-
   // fetch to submit info to database
   let addExpense = (e) => {
     e.preventDefault();
+
+    if(!amount) {
+      setAmountError(true)
+      return
+    }
+
+    if(!dueDate) {
+      setDateError(true)
+      return
+    }
+
+    if(!category) {
+      setcategoryError(true)
+      return
+    }
+
+    if(!reoccuring) {
+      setReoccuringError(true)
+      return
+    }
+
+    if(!name) {
+      setNameError(true)
+      return
+    }
 
     fetch(`http://localhost:3000/expense/add`, {
       method: "POST",
@@ -113,6 +135,11 @@ const ExpAdd = (props) => {
     })
       .then((res) => res.json())
       .then(handleClickOpen);
+      setAmountError(false);
+      setNameError(false);
+      setDateError(false);
+      setReoccuringError(false);
+      setNameError(false);
   };
 
   // Dialog box
@@ -152,6 +179,7 @@ const ExpAdd = (props) => {
                 value={category}
                 onChange={updateCategory}
                 required="true"
+                error={categoryError}
                 helperText=""
               >
                 <MenuItem value={"Restaurant"}>Restaurant</MenuItem>
@@ -181,6 +209,7 @@ const ExpAdd = (props) => {
                 value={reoccuring}
                 onChange={updateReoccuring}
                 required="true"
+                error={reoccuringError}
                 helperText=""
               >
                 <MenuItem value="">
@@ -202,6 +231,7 @@ const ExpAdd = (props) => {
               variant="standard"
               onChange={updateName}
               required="true"
+              error={nameError}
               helperText=""
             />
           </Grid>
@@ -217,7 +247,8 @@ const ExpAdd = (props) => {
               variant="standard"
               onChange={updateAmount}
               required="true"
-              helperText=""
+              error={amountError}
+              helperText="The payment amount is required"
             />
           </Grid>
           <Grid item sm={9} />
@@ -242,6 +273,7 @@ const ExpAdd = (props) => {
                 value={dueDate}
                 onChange={updateDueDate}
                 required="true"
+                error={dateError}
                 helperText=""
                 KeyboardButtonProps={{
                   "aria-label": "change date",

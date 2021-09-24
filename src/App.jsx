@@ -97,7 +97,7 @@ function App() {
         <Auth updateToken={updateToken} />
         <Landing />
         <ExpAdd token={sessionToken} />
-        {/* <ExpSearch token={sessionToken} />  */}
+        <ExpSearch token={sessionToken} /> 
         <Chart />
         {/* <Upcoming /> */}
       </ThemeProvider>

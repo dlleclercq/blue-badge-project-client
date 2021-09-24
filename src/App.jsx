@@ -25,7 +25,6 @@ import ExpDel from "./components/expenses/ExpDel";
 import ExpEdit from "./components/expenses/ExpEdit";
 
 import "./App.css";
-import ExpEdit from "./components/expenses/ExpEdit";
 
 //teal = #6CCFF6
 //purple = #5E0035
@@ -97,8 +96,8 @@ function App() {
   // };
 
   return (
-    <Router>
-      <div>
+    <div>
+        <Router>
         <ThemeProvider theme={customTheme}>
           <Switch>
             <Route exact path="/">
@@ -106,19 +105,19 @@ function App() {
             </Route>
 
             <Route exact path="/ExpSplash">
-              <ExpSplash token={sessionToken} />
+              {/* <ExpSplash token={sessionToken} /> */}
               <ExpAdd token={sessionToken} />
               {/* <ExpEdit token={sessionToken} /> */}
               <ExpenseTable token={sessionToken} />
-              <ExpSearch token={sessionToken} />
-              <ExpDel token={sessionToken} />
+              {/* <ExpSearch token={sessionToken} />
+              <ExpDel token={sessionToken} /> */}
             </Route>
             <Route exact path="/HomeNav" component={HomeNav} />
             <Route exact path="*" component={PageNotFound} />
-          </Switch>
+          </Switch> 
         </ThemeProvider>
-      </div>
     </Router>
+      </div>
 
   );
 }

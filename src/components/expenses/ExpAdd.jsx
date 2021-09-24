@@ -89,26 +89,26 @@ const ExpAdd = (props) => {
   // validate input form return section
   let addExpense = (e) => {
     e.preventDefault();
-    if (!amount) {
-      setAmountError(true);
-      return;
-    }
-    if (!dueDate) {
-      setDateError(true);
-      return;
-    }
-    if (!category) {
-      setcategoryError(true);
-      return;
-    }
-    if (!reoccuring) {
-      setReoccuringError(true);
-      return;
-    }
-    if (!name) {
-      setNameError(true);
-      return;
-    }
+    // if (!amount) {
+    //   setAmountError(true);
+    //   return;
+    // }
+    // if (!dueDate) {
+    //   setDateError(true);
+    //   return;
+    // }
+    // if (!category) {
+    //   setcategoryError(true);
+    //   return;
+    // }
+    // if (!reoccuring) {
+    //   setReoccuringError(true);
+    //   return;
+    // }
+    // if (!name) {
+    //   setNameError(true);
+    //   return;
+    // }
     // fetch to submit info to database
     fetch(`http://localhost:3000/expense/add`, {
       method: "POST",
@@ -133,6 +133,7 @@ const ExpAdd = (props) => {
     setDateError(false);
     setReoccuringError(false);
     setNameError(false);
+    window.location.href = "/expsplash";
   };
   // Dialog box
   const [open, setOpen] = React.useState(false);
@@ -144,7 +145,7 @@ const ExpAdd = (props) => {
   };
   return (
     <div className={classes.root}>
-      <form>
+      <form onSubmit={addExpense}>
         <Grid container spacing={3} direction="row">
           <Grid item container style={{ borderBottom: "1px solid #757780" }}>
             <Grid item xs={1}>
@@ -197,7 +198,7 @@ const ExpAdd = (props) => {
                   value={category}
                   onChange={updateCategory}
                   required="true"
-                  error={categoryError}
+                 
                 >
                   <MenuItem value="">
                     <em>None</em>
@@ -228,7 +229,7 @@ const ExpAdd = (props) => {
                   onChange={updateReoccuring}
                   disableUnderline="true"
                   required="true"
-                  error={reoccuringError}
+                  // error={reoccuringError}
                 >
                   <MenuItem value="">
                     <em>None</em>
@@ -253,7 +254,7 @@ const ExpAdd = (props) => {
                 variant="standard"
                 onChange={updateName}
                 required="true"
-                error={nameError}
+                // error={nameError}
               />
             </Paper>
           </Grid>
@@ -266,7 +267,7 @@ const ExpAdd = (props) => {
                 variant="standard"
                 onChange={updateAmount}
                 required="true"
-                error={amountError}
+                // error={amountError}
               />
             </Paper>
           </Grid>
@@ -289,7 +290,7 @@ const ExpAdd = (props) => {
                   value={dueDate}
                   onChange={updateDueDate}
                   required="true"
-                  error={dateError}
+                  // error={dateError}
                   KeyboardButtonProps={{
                     "aria-label": "change date",
                   }}
@@ -307,7 +308,7 @@ const ExpAdd = (props) => {
               <Button
                 variant="contained"
                 color="secondary"
-                onClick={addExpense}
+                type="submit"
               >
                 Add Expense
               </Button>

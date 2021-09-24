@@ -39,6 +39,7 @@ function getComparator(order, orderBy) {
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
+
 // This method is created for cross-browser compatibility, if you don't
 // need to support IE11, you can use Array.prototype.sort() directly
 function stableSort(array, comparator) {
@@ -52,6 +53,7 @@ function stableSort(array, comparator) {
   });
   return stabilizedThis.map((el) => el[0]);
 }
+
 const headCells = [
   {
     id: "name",
@@ -106,6 +108,7 @@ function EnhancedTableHead(props) {
     </TableHead>
   );
 }
+
 EnhancedTableHead.propTypes = {
   onRequestSort: PropTypes.func.isRequired,
   order: PropTypes.oneOf(["asc", "desc"]).isRequired,
@@ -171,7 +174,6 @@ export default function ExpenseTable(props) {
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
-
         selected.slice(selectedIndex + 1)
       );
     }
@@ -187,6 +189,7 @@ export default function ExpenseTable(props) {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
   const handleChangeDense = (event) => {
     setDense(event.target.checked);
   };
@@ -204,7 +207,6 @@ export default function ExpenseTable(props) {
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
-
             size={dense ? "small" : "medium"}
           >
             <EnhancedTableHead
@@ -243,7 +245,6 @@ export default function ExpenseTable(props) {
                             <CheckBox color="primary" />
                           ))
                         }
-
                       </TableCell>
                     </TableRow>
                   );
@@ -274,7 +275,6 @@ export default function ExpenseTable(props) {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
-<Box> 
       {/* <form>
       <Button variant="contained" color="secondary" onClick={handleClickOpen}>
         Signup
@@ -317,4 +317,3 @@ export default function ExpenseTable(props) {
     </Box>
   );
 }
-

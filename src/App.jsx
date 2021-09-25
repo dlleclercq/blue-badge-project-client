@@ -103,7 +103,7 @@ function App() {
             </Route>
 
             <Route exact path="/ExpAdd">
-              <ExpAdd token={sessionToken} />
+              {/* <ExpAdd token={sessionToken} /> */}
               <ExpenseTable token={sessionToken} />
               {/* <ExpEdit token={sessionToken} /> */}
               {/* <ExpSearch token={sessionToken} />

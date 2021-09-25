@@ -26,6 +26,7 @@ import { Button } from "@material-ui/core";
 import ExpEdit from "../expenses/ExpEdit";
 import ExpDel from "../expenses/ExpDel";
 import APIURL from "../../helpers/enviornment";
+import ExpAdd from "../expenses/ExpAdd";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -216,7 +217,7 @@ export default function ExpenseTable(props) {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%" }}> <ExpAdd token={props.token} getExpense={getExpense}/>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <TableContainer>
           <Table

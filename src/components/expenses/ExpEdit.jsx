@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Grid } from "@material-ui/core";
 
 // drop down list imports
 import InputLabel from "@material-ui/core/InputLabel";
@@ -28,11 +29,10 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
 const ExpEdit = (props) => {
-
   // useEffect(() => {
   //   handleClickOpen();
   // }, [])
-console.log(props.data)
+  console.log(props.data);
   const [open, setOpen] = React.useState(false);
 
   const [editCategory, setEditCategory] = useState(props.data.category);
@@ -42,7 +42,7 @@ console.log(props.data)
   const [editReoccuring, setEditReoccuring] = useState(props.data.reoccuring);
 
   let updateCategory = (e) => {
-    debugger
+    debugger;
     setEditCategory(e.target.value);
   };
   let updateName = (e) => {
@@ -61,7 +61,7 @@ console.log(props.data)
   // **** this should be set to true if button clicked to update from view all
   const ExpUpdate = (e) => {
     e.preventDefault();
-    debugger
+    debugger;
     fetch(`http://localhost:3000/expense/edit/${props.data.id}`, {
       method: "PUT",
       body: JSON.stringify({
@@ -80,9 +80,8 @@ console.log(props.data)
     })
       .then((res) => res.json())
       .then(() => {
-        props.getExpense()
-      })
-    
+        props.getExpense();
+      });
   };
 
   const handleClickOpen = () => {
@@ -95,99 +94,110 @@ console.log(props.data)
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open form dialog
+      <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
+        Edit
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
         <DialogContent>
-          <DialogContentText>Edit Expense</DialogContentText>
+          <DialogContentText color="#020202" fontWeight="bold">
+            Edit Expense
+          </DialogContentText>
           {/* category dropdown list */}
-          <FormControl>
-            <InputLabel id="ddlExpCat">Category</InputLabel>
-            <Select
-              labelId="ddlExpCat"
-              id="ddlExpCat"
-              disableUnderline="true"
-              value={editCategory}
-              onChange={updateCategory}
-              required="true"
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={"Restaurant"}>Restaurant</MenuItem>
-              <MenuItem value={"Food"}>Food</MenuItem>
-              <MenuItem value={"Electric"}>Electric</MenuItem>
-              <MenuItem value={"Gas"}>Gas</MenuItem>
-              <MenuItem value={"Water"}>Water</MenuItem>
-              <MenuItem value={"Childcare"}>Childcare</MenuItem>
-              <MenuItem value={"Health"}>Health</MenuItem>
-              <MenuItem value={"Beauty"}>Beauty</MenuItem>
-              <MenuItem value={"Other"}>Other</MenuItem>
-            </Select>
-          </FormControl>
+          <Grid containter>
+            <Grid item xs={12}>
+              <FormControl>
+                <InputLabel id="ddlExpCat">Category</InputLabel>
+                <Select
+                  labelId="ddlExpCat"
+                  id="ddlExpCat"
+                  disableUnderline="true"
+                  value={editCategory}
+                  onChange={updateCategory}
+                  required="true"
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={"Restaurant"}>Restaurant</MenuItem>
+                  <MenuItem value={"Food"}>Food</MenuItem>
+                  <MenuItem value={"Electric"}>Electric</MenuItem>
+                  <MenuItem value={"Gas"}>Gas</MenuItem>
+                  <MenuItem value={"Water"}>Water</MenuItem>
+                  <MenuItem value={"Childcare"}>Childcare</MenuItem>
+                  <MenuItem value={"Health"}>Health</MenuItem>
+                  <MenuItem value={"Beauty"}>Beauty</MenuItem>
+                  <MenuItem value={"Other"}>Other</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
 
-          {/* Recurring payment dropdown list  */}
-          <FormControl>
-            <InputLabel id="ddlExpRec">Frequency</InputLabel>
-            <Select
-              labelId="ddlExpRec"
-              id="ddlExpRec"
-              value={editReoccuring}
-              onChange={updateReoccuring}
-              disableUnderline="true"
-              required="true"
-              // error={reoccuringError}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={true}>Recurring</MenuItem>
-              <MenuItem value={false}>Non-Recurring</MenuItem>
-            </Select>
-          </FormControl>
+            {/* Recurring payment dropdown list  */}
+            <Grid item xs={12}>
+              <FormControl>
+                <InputLabel id="ddlExpRec">Frequency</InputLabel>
+                <Select
+                  labelId="ddlExpRec"
+                  id="ddlExpRec"
+                  value={editReoccuring}
+                  onChange={updateReoccuring}
+                  disableUnderline="true"
+                  required="true"
+                  // error={reoccuringError}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={true}>Recurring</MenuItem>
+                  <MenuItem value={false}>Non-Recurring</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
 
-          {/* vendor name input */}
-          <TextField
-            id="txtName"
-            label="Vendor"
-            variant="standard"
-            onChange={updateName}
-            required="true"
-            value={editName}
-            // error={nameError}
-          />
+            {/* vendor name input */}
+            <Grid item xs={12}>
+              <TextField
+                id="txtName"
+                label="Vendor"
+                variant="standard"
+                onChange={updateName}
+                required="true"
+                value={editName}
+                // error={nameError}
+              />
 
-          {/* amount input */}
-          <TextField
-            id="txtAmount"
-            label="Payment Amount"
-            variant="standard"
-            onChange={updateAmount}
-            required="true"
-            value={editAmount}
-            // error={amountError}
-          />
-
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
-              margin="normal"
-              id="dpDueDate"
-              format="MM/dd/yyyy"
-              label="Due Date"
-              helperText=""
-              disablePast="true"
-              // disableToolbar="true"
-              value={editDueDate}
-              onChange={updateDueDate}
-              required="true"
-              // error={dateError}
-              KeyboardButtonProps={{
-                "aria-label": "change date",
-              }}
-            />
-          </MuiPickersUtilsProvider>
+              {/* amount input */}
+              <TextField
+                id="txtAmount"
+                label="Payment Amount"
+                variant="standard"
+                onChange={updateAmount}
+                required="true"
+                value={editAmount}
+                // error={amountError}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  margin="normal"
+                  id="dpDueDate"
+                  format="MM/dd/yyyy"
+                  label="Due Date"
+                  helperText=""
+                  disablePast="true"
+                  // disableToolbar="true"
+                  value={editDueDate}
+                  onChange={updateDueDate}
+                  required="true"
+                  // error={dateError}
+                  KeyboardButtonProps={{
+                    "aria-label": "change date",
+                  }}
+                />
+              </MuiPickersUtilsProvider>
+            </Grid>
+          </Grid>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

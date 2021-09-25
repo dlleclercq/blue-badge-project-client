@@ -10,6 +10,7 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@material-ui/core";
+import APIURL from "../../helpers/enviornment";
 
 const Signup = (props) => {
   const history = useHistory();
@@ -29,7 +30,7 @@ const Signup = (props) => {
     if (!email || !password) return;
 
     e.preventDefault();
-    fetch("http://localhost:3000/user/signup", {
+    fetch(`${APIURL}/user/signup`, {
       method: "POST",
       body: JSON.stringify({
         user: { email: email, passwordhash: password },

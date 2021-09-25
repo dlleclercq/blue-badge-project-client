@@ -26,6 +26,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import APIURL from "../../helpers/enviornment";
 
 const ExpDel = (props) => {
 
@@ -55,7 +56,7 @@ const ExpDel = (props) => {
   };
 
   const deleteExpense = (expense) => {
-    fetch(`http://localhost:3000/expense/delete/${props.data.id}`, {
+    fetch(`${APIURL}/expense/delete/${props.data.id}`, {
       method: "DELETE",
       headers: new Headers({
         "Content-Type": "application/json",

@@ -25,6 +25,7 @@ import { CheckBox } from "@mui/icons-material";
 import { Button } from "@material-ui/core";
 import ExpEdit from "../expenses/ExpEdit";
 import ExpDel from "../expenses/ExpDel";
+import APIURL from "../../helpers/enviornment";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -134,7 +135,7 @@ export default function ExpenseTable(props) {
   const getExpense = () => {
     console.log(props);
     if (!props.token) return;
-    fetch("http://localhost:3000/expense/all", {
+    fetch(`${APIURL}/expense/all`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",

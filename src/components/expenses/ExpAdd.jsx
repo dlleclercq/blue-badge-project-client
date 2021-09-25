@@ -32,6 +32,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import APIURL from "../../helpers/enviornment";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -110,7 +111,7 @@ const ExpAdd = (props) => {
     //   return;
     // }
     // fetch to submit info to database
-    fetch(`http://localhost:3000/expense/add`, {
+    fetch(`${APIURL}/expense/add`, {
       method: "POST",
       body: JSON.stringify({
         expense: {

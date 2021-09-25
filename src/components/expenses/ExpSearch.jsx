@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import { FormControl, responsiveFontSizes } from "@material-ui/core";
 import { isPropertySignature } from "typescript";
 import { ContentPasteOutlined } from "@mui/icons-material";
+import APIURL from "../../helpers/enviornment";
 
 const ExpSearch = (props) => {
   const [searchItem, setSearchItem] = useState("");
@@ -20,7 +21,7 @@ const ExpSearch = (props) => {
   };
 
   let searchByName = () => {
-    fetch(`http://localhost:3000/expense/all`, {
+    fetch(`${APIURL}/expense/all`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",

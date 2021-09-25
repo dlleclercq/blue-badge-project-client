@@ -27,6 +27,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import APIURL from "../../helpers/enviornment";
 
 const ExpEdit = (props) => {
   // useEffect(() => {
@@ -42,7 +43,6 @@ const ExpEdit = (props) => {
   const [editReoccuring, setEditReoccuring] = useState(props.data.reoccuring);
 
   let updateCategory = (e) => {
-    debugger;
     setEditCategory(e.target.value);
   };
   let updateName = (e) => {
@@ -58,11 +58,10 @@ const ExpEdit = (props) => {
     setEditReoccuring(e.target.value);
   };
 
-  // **** this should be set to true if button clicked to update from view all
+
   const ExpUpdate = (e) => {
     e.preventDefault();
-    debugger;
-    fetch(`http://localhost:3000/expense/edit/${props.data.id}`, {
+    fetch(`${APIURL}/expense/edit/${props.data.id}`, {
       method: "PUT",
       body: JSON.stringify({
         expense: {

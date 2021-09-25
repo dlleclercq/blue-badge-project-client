@@ -23,6 +23,7 @@ import { visuallyHidden } from "@mui/utils";
 import { useForkRef } from "@mui/material";
 import { CheckBox } from "@mui/icons-material";
 import { Button } from "@material-ui/core";
+import ExpEdit from "../expenses/ExpEdit";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -84,6 +85,18 @@ const headCells = [
     numeric: false,
     disablePadding: false,
     label: "Reoccuring",
+  },
+  {
+    id: "edit",
+    numeric: false,
+    disablePadding: false,
+    label: "Edit",
+  },
+  {
+    id: "delete",
+    numeric: false,
+    disablePadding: false,
+    label: "Delete",
   },
 ];
 
@@ -246,6 +259,8 @@ export default function ExpenseTable(props) {
                           ))
                         }
                       </TableCell>
+                      <TableCell align="left"><ExpEdit getExpense={getExpense} token={props.token} data={row}/></TableCell>
+                      <TableCell align="left"><button>test</button></TableCell>
                     </TableRow>
                   );
                 })}

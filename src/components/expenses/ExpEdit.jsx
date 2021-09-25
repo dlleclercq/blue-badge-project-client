@@ -42,7 +42,6 @@ console.log(props.data)
   const [editReoccuring, setEditReoccuring] = useState(props.data.reoccuring);
 
   let updateCategory = (e) => {
-    debugger
     setEditCategory(e.target.value);
   };
   let updateName = (e) => {
@@ -58,7 +57,7 @@ console.log(props.data)
     setEditReoccuring(e.target.value);
   };
 
-  // **** this should be set to true if button clicked to update from view all
+
   const ExpUpdate = (e) => {
     e.preventDefault();
     debugger
@@ -96,7 +95,7 @@ console.log(props.data)
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Open form dialog
+        Edit
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Subscribe</DialogTitle>

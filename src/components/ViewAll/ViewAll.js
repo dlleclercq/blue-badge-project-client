@@ -24,6 +24,7 @@ import { useForkRef } from "@mui/material";
 import { CheckBox } from "@mui/icons-material";
 import { Button } from "@material-ui/core";
 import ExpEdit from "../expenses/ExpEdit";
+import ExpDel from "../expenses/ExpDel";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -259,8 +260,8 @@ export default function ExpenseTable(props) {
                           ))
                         }
                       </TableCell>
-                      <TableCell align="left"><ExpEdit getExpense={getExpense} token={props.token} data={row}/></TableCell>
-                      <TableCell align="left"><button>test</button></TableCell>
+                      <TableCell align="left"><Button><ExpEdit getExpense={getExpense} token={props.token} data={row}/></Button></TableCell>
+                      <TableCell align="left"><Button><ExpDel getExpense={getExpense} token={props.token} data={row}/></Button></TableCell>
                     </TableRow>
                   );
                 })}

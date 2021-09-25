@@ -57,21 +57,10 @@ const Landing = () => {
               }}
             >
               <h1>iSpend</h1>
-              <p>
-                She must have hidden the plans in the escape pod. Send a
-                detachment down to retrieve them, and see to it personally,
-                Commander. There'll be no one to stop us this time! No! Alderaan
-                is peaceful. We have no weapons. You can't possibly… Still,
-                she's got a lot of spirit. I don't know, what do you think?
-                Obi-Wan is here. The Force is with him. Partially, but it also
-                obeys your commands. Alderaan? I'm not going to Alderaan. I've
-                got to go home. It's late, I'm in for it as it is. Partially,
-                but it also obeys your commands. What good is a reward if you
-                ain't around to use it? Besides, attacking that battle station
-                ain't my idea of courage. It's more like…suicide. Still, she's
-                got a lot of spirit. I don't know, what do you think? Don't act
-                so surprised, Your Highness.
-              </p>
+              <h3>
+                The best tools are ones you actually use. Keep track of your
+                expenses with iSpend.
+              </h3>
             </div>
           </Paper>
         </CardContent>

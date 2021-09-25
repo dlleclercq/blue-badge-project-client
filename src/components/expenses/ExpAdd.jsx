@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Chart from "../chart/Chart";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 // drop down list imports
 import InputLabel from "@material-ui/core/InputLabel";
@@ -43,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
   },
   paper: {
-    padding: theme.spacing(0.5),
+    padding: theme.spacing(1),
     backgroundColor: "#6ccff6",
     opacity: 0.8,
   },
@@ -51,6 +52,8 @@ const useStyles = makeStyles((theme) => ({
 
 const ExpAdd = (props) => {
   const classes = useStyles();
+  const history = useHistory();
+
   // declare useState variables to submit via sequelize
   const [category, setCategory] = useState("");
   const [name, setName] = useState("");
@@ -144,6 +147,11 @@ const ExpAdd = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  function handleClick() {
+    history.push("/ExpAdd");
+  }
+
   return (
     <div className={classes.root}>
       <form onSubmit={addExpense}>
@@ -171,22 +179,7 @@ const ExpAdd = (props) => {
             </Grid>
           </Grid>
 
-          <Grid
-            item
-            container
-            style={{
-              justifyContent: "center",
-              marginTop: "5px",
-              border: "1px solid #6ccff6",
-            }}
-          >
-            <Paper className={classes.paper}>
-              <Chart />
-            </Paper>
-          </Grid>
-
-          <Grid item xs={4} />
-
+          <Grid item xs={3} />
           <Grid item xs={2}>
             <Paper className={classes.paper}>
               {/* category dropdown list */}
@@ -199,7 +192,6 @@ const ExpAdd = (props) => {
                   value={category}
                   onChange={updateCategory}
                   required="true"
-                 
                 >
                   <MenuItem value="">
                     <em>None</em>
@@ -242,10 +234,6 @@ const ExpAdd = (props) => {
             </Paper>
           </Grid>
 
-          <Grid item xs={4} />
-
-          <Grid item xs={4} />
-
           <Grid item xs={2}>
             <Paper className={classes.paper}>
               {/* vendor name input */}
@@ -259,6 +247,10 @@ const ExpAdd = (props) => {
               />
             </Paper>
           </Grid>
+          <Grid item xs={3} />
+
+          <Grid item xs={4} />
+
           <Grid item xs={2}>
             <Paper className={classes.paper}>
               {/* amount input */}
@@ -273,15 +265,11 @@ const ExpAdd = (props) => {
             </Paper>
           </Grid>
 
-          <Grid item xs={4} />
-
-          <Grid item xs={5} />
-
           <Grid item xs={2}>
             <Paper className={classes.paper}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
-                  margin="normal"
+                  margin="dense"
                   id="dpDueDate"
                   format="MM/dd/yyyy"
                   label="Due Date"
@@ -302,20 +290,13 @@ const ExpAdd = (props) => {
 
           <Grid item xs={5} />
 
-          <Grid item xs={5} />
-
           <Grid item xs={2}>
             <Paper style={{ backgroundColor: "#020202" }}>
-              <Button
-                variant="contained"
-                color="secondary"
-                type="submit"
-              >
+              <Button variant="contained" color="secondary" type="submit">
                 Add Expense
               </Button>
             </Paper>
           </Grid>
-          <Grid item sm={2} />
           <Grid item sm={2} />
           <Grid item sm={1}>
             {/* err/succ msg */}
@@ -334,13 +315,13 @@ const ExpAdd = (props) => {
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
-                {/* <Button onClick={handleClose}>Disagree</Button> */}
                 <Button onClick={handleClose} autoFocus>
                   OK
                 </Button>
               </DialogActions>
             </Dialog>
           </Grid>
+
           <Grid item sm={9} />
         </Grid>
       </form>

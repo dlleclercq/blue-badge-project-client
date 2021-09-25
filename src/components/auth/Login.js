@@ -46,7 +46,7 @@ const Login = (props) => {
   };
 
   function handleClick() {
-    history.push("/ExpSplash");
+    history.push("/ExpAdd");
   }
 
   return (

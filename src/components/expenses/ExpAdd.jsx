@@ -137,7 +137,6 @@ const ExpAdd = (props) => {
     setDateError(false);
     setReoccuringError(false);
     setNameError(false);
-    window.location.href = "/expsplash";
   };
   // Dialog box
   const [open, setOpen] = React.useState(false);

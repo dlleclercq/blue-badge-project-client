@@ -143,7 +143,7 @@ const ExpAdd = (props) => {
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
     setOpen(true);
-    props.getExpense()
+    props.getExpense();
   };
   const handleClose = () => {
     setOpen(false);

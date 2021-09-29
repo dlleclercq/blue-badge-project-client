@@ -9,6 +9,7 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@material-ui/core";
+import APIURL from "../../helpers/enviornment";
 
 const Login = (props) => {
   const history = useHistory();
@@ -28,7 +29,7 @@ const Login = (props) => {
     if (!email || !password) return;
 
     e.preventDefault();
-    fetch("http://localhost:3000/user/login", {
+    fetch(`${APIURL}/user/login`, {
       method: "POST",
       body: JSON.stringify({
         user: { email: email, passwordhash: password },
@@ -45,7 +46,7 @@ const Login = (props) => {
   };
 
   function handleClick() {
-    history.push("/ExpSplash");
+    history.push("/ExpAdd");
   }
 
   return (

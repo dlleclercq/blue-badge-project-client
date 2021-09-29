@@ -23,6 +23,10 @@ import { visuallyHidden } from "@mui/utils";
 import { useForkRef } from "@mui/material";
 import { CheckBox } from "@mui/icons-material";
 import { Button } from "@material-ui/core";
+import ExpEdit from "../expenses/ExpEdit";
+import ExpDel from "../expenses/ExpDel";
+import APIURL from "../../helpers/enviornment";
+import ExpAdd from "../expenses/ExpAdd";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -85,6 +89,18 @@ const headCells = [
     disablePadding: false,
     label: "Reoccuring",
   },
+  {
+    id: "edit",
+    numeric: false,
+    disablePadding: false,
+    label: "Edit",
+  },
+  {
+    id: "delete",
+    numeric: false,
+    disablePadding: false,
+    label: "Delete",
+  },
 ];
 
 function EnhancedTableHead(props) {
@@ -120,7 +136,7 @@ export default function ExpenseTable(props) {
   const getExpense = () => {
     console.log(props);
     if (!props.token) return;
-    fetch("http://localhost:3000/expense/all", {
+    fetch(`${APIURL}/expense/all`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -201,7 +217,7 @@ export default function ExpenseTable(props) {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%" }}> <ExpAdd token={props.token} getExpense={getExpense}/>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <TableContainer>
           <Table
@@ -216,7 +232,7 @@ export default function ExpenseTable(props) {
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
             />
-            <TableBody>
+            <TableBody style={{ background: "#020202" }}>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.slice().sort(getComparator(order, orderBy)) */}
               {stableSort(rows, getComparator(order, orderBy))
@@ -233,11 +249,19 @@ export default function ExpenseTable(props) {
                       key={row?.name}
                       selected={isItemSelected}
                     >
-                      <TableCell align="left">{row?.name}</TableCell>
-                      <TableCell align="left">{row?.category}</TableCell>
-                      <TableCell align="left">$ {row?.amount}</TableCell>
-                      <TableCell align="left">{row?.dueDate}</TableCell>
-                      <TableCell align="left">
+                      <TableCell align="left" style={{ color: "#6ccff6" }}>
+                        {row?.name}
+                      </TableCell>
+                      <TableCell align="left" style={{ color: "#6ccff6" }}>
+                        {row?.category}
+                      </TableCell>
+                      <TableCell align="left" style={{ color: "#6ccff6" }}>
+                        $ {row?.amount}
+                      </TableCell>
+                      <TableCell align="left" style={{ color: "#6ccff6" }}>
+                        {row?.dueDate}
+                      </TableCell>
+                      <TableCell align="left" style={{ color: "#6ccff6" }}>
                         {
                           (row.reoccuring = false ? (
                             <CheckBox disabled color="primary" />
@@ -245,7 +269,21 @@ export default function ExpenseTable(props) {
                             <CheckBox color="primary" />
                           ))
                         }
+                      </TableCell >
+                      <TableCell align="left" style={{ color: "#6ccff6" }}>
+                        <ExpEdit
+                          getExpense={getExpense}
+                          token={props.token}
+                          data={row}
+                        />
                       </TableCell>
+                      <TableCell align="left" style={{ color: "#6ccff6" }}>
+                          <ExpDel 
+                            getExpense={getExpense}
+                            token={props.token}
+                            data={row}
+                          />
+                      </TableCell> 
                     </TableRow>
                   );
                 })}
@@ -271,49 +309,10 @@ export default function ExpenseTable(props) {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <FormControlLabel
+      {/* <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
-      />
-      {/* <form>
-      <Button variant="contained" color="secondary" onClick={handleClickOpen}>
-        Signup
-      </Button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Signup</DialogTitle>
-        <DialogContent>
-          <DialogContentText color="primary">
-            To join iSpend, please enter the following:
-          </DialogContentText>
-
-          <form noValidate autoComplete="off">
-            <TextField
-              autoFocus
-              margin="dense"
-              id="email"
-              label="Email Address"
-              type="email"
-              input
-              onChange={(e) => setEmail(e.target.value)}
-              fullWidth
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="passwordhash"
-              label="Password"
-              type="password"
-              input
-              onChange={(e) => setPassword(e.target.value)}
-              fullWidth
-            />
-          </form>
-        </DialogContent>
-        </form> */}
+      /> */}
     </Box>
   );
 }

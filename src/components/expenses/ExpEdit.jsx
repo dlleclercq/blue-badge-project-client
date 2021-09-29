@@ -1,209 +1,206 @@
-// import React, { useState, useEffect } from "react";
-// import { makeStyles } from "@material-ui/core/styles";
+import React, { useState, useEffect } from "react";
+import { Grid } from "@material-ui/core";
 
-// // drop down list imports
-// import InputLabel from "@material-ui/core/InputLabel";
-// import MenuItem from "@material-ui/core/MenuItem";
-// import Select from "@material-ui/core/Select";
+// drop down list imports
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
 
-// // text field imports
-// import TextField from "@material-ui/core/TextField";
+// text field imports
+import TextField from "@material-ui/core/TextField";
 
-// // date picker imports
-// import "date-fns";
-// import DateFnsUtils from "@date-io/date-fns";
-// import {
-//   MuiPickersUtilsProvider,
-//   KeyboardDatePicker,
-// } from "@material-ui/pickers";
+// date picker imports
+import "date-fns";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
 
-// // import for button
-// import Button from "@material-ui/core/Button";
-// import { FormControl } from "@material-ui/core";
+// import for button
+import Button from "@material-ui/core/Button";
+import { FormControl } from "@material-ui/core";
 
-// // layout imports
-// import { Grid } from "@material-ui/core";
+// imports for dialog box
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import APIURL from "../../helpers/enviornment";
 
-// // modal imports
-// import Box from "@mui/material/Box";
-// import Typography from "@mui/material/Typography";
-// import Modal from "@mui/material/Modal";
-// // import add view all page
+const ExpEdit = (props) => {
+  const [open, setOpen] = React.useState(false);
 
-  
-// const ExpEdit = (props) => {
+  const [editCategory, setEditCategory] = useState(props.data.category);
+  const [editName, setEditName] = useState(props.data.name);
+  const [editAmount, setEditAmount] = useState(props.data.amount);
+  const [editDueDate, setEditDueDate] = useState(props.data.dueDate);
+  const [editReoccuring, setEditReoccuring] = useState(props.data.reoccuring);
 
-//   const [category, setCategory] = useState("");
-//   const [name, setName] = useState("");
-//   const [amount, setAmount] = useState("");
-//   const [dueDate, setDueDate] = useState("");
-//   const [reoccuring, setReoccuring] = React.useState(false);
+  let updateCategory = (e) => {
+    setEditCategory(e.target.value);
+  };
+  let updateName = (e) => {
+    setEditName(e.target.value);
+  };
+  let updateAmount = (e) => {
+    setEditAmount(e.target.value);
+  };
+  let updateDueDate = (date) => {
+    setEditDueDate(date);
+  };
+  let updateReoccuring = (e) => {
+    setEditReoccuring(e.target.value);
+  };
 
-//   /***********************
-//       *** Edit EXpense ***
-//       This function will be passed down as props for use on view all page buttons
-//       This FC will only display if the "edit button" is clicked on view all
-//    **********************/
 
-//   const [updateCategory, setUpdateCategory] = useState(props.viewAll.category);
-//   const [updateName, setUpdateName] = useState(props.viewAll.name);
-//   const [updateAmount, setUpdateAmount] = useState(props.viewAll.name);
-//   const [updateDueDate, setUpdateDueDate] = useState(props.viewAll.name);
-//   const [updateReoccuring, setUpdateReoccuring] = useState(
-//     props.viewAll.reoccuring
-//   );
-//   /**
-//     // **** this should be set to true if button clicked to update from view all
-//      */
-//   const [updateActive, setUpdateActive] = useState(false);
+  const ExpUpdate = (e) => {
+    e.preventDefault();
+    fetch(`${APIURL}/expense/edit/${props.data.id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        expense: {
+          category: editCategory,
+          name: editName,
+          amount: editAmount,
+          dueDate: editDueDate,
+          reoccuring: editReoccuring,
+        },
+      }),
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: props.token,
+      }),
+    })
+      .then((res) => res.json())
+      .then(() => {
+        props.getExpense();
+      })
+      .then(handleClose()); 
+  };
 
-//   /*
-//    *** this state variable is intialized to empty object.  The object will be filled using the info form the view all when on the line item the user clicks the edit button on
-//    */
-//   const [expToUpdate, setExpToUpdate] = useState({});
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-//   const editUpdateExpense = (expense) => {
-//     setExpToUpdate(expense);
-//     console.log("Expense data", expense);
-//   };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-//   /*
-//    *** these two functions are toggled by button clicks on view all
-//    */
-//   const updateOn = () => {
-//     setUpdateActive(true);
-//   };
+  return (
+    <div>
+      <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
+        Edit
+      </Button>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <DialogContent>
+          <DialogContentText color="#020202" fontWeight="bold">
+            Edit Expense
+          </DialogContentText>
+          {/* category dropdown list */}
+          <Grid containter>
+            <Grid item xs={12}>
+              <FormControl>
+                <InputLabel id="ddlExpCat">Category</InputLabel>
+                <Select
+                  labelId="ddlExpCat"
+                  id="ddlExpCat"
+                  disableUnderline="true"
+                  value={editCategory}
+                  onChange={updateCategory}
+                  required="true"
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={"Restaurant"}>Restaurant</MenuItem>
+                  <MenuItem value={"Food"}>Food</MenuItem>
+                  <MenuItem value={"Electric"}>Electric</MenuItem>
+                  <MenuItem value={"Gas"}>Gas</MenuItem>
+                  <MenuItem value={"Water"}>Water</MenuItem>
+                  <MenuItem value={"Childcare"}>Childcare</MenuItem>
+                  <MenuItem value={"Health"}>Health</MenuItem>
+                  <MenuItem value={"Beauty"}>Beauty</MenuItem>
+                  <MenuItem value={"Other"}>Other</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
 
-//   const updateOff = () => {
-//     setUpdateActive(false);
-//   };
+            {/* Recurring payment dropdown list  */}
+            <Grid item xs={12}>
+              <FormControl>
+                <InputLabel id="ddlExpRec">Frequency</InputLabel>
+                <Select
+                  labelId="ddlExpRec"
+                  id="ddlExpRec"
+                  value={editReoccuring}
+                  onChange={updateReoccuring}
+                  disableUnderline="true"
+                  required="true"
+                  // error={reoccuringError}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={true}>Recurring</MenuItem>
+                  <MenuItem value={false}>Non-Recurring</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
 
-//   const ExpUpdate = (e, exp) => {
-//     // *** this function will have to be referenced in view
-//     e.preventDefault();
-//     console.log("Item to be updated:", props.expenseToUpdate);
-//     fetch(`http://localhost:3000/expense/edit:id`, {
-//       method: "PUT",
-//       body: JSON.stringify({
-//         expense: {
-//           category: updateCategory,
-//           name: updateName,
-//           amount: updateAmount,
-//           dueDate: updateDueDate,
-//           reoccuring: updateReoccuring,
-//         },
-//       }),
-//       headers: new Headers({
-//         "Content-Type": "application/jason",
-//         Authorization: props.token,
-//       }),
-//     }).then((res) => {
-//       props.fetchExpenses(); // *** need actual name of fetch from add all FC
-//       props.updateOff();
-//     });
-//   };
+            {/* vendor name input */}
+            <Grid item xs={12}>
+              <TextField
+                id="txtName"
+                label="Vendor"
+                variant="standard"
+                onChange={updateName}
+                required="true"
+                value={editName}
+                // error={nameError}
+              />
 
-//   return (
-//     <div>
-//        <h1>Delete</h1>
-//     <Modal isOpen={true}>
-//       <ModalHeader>Update an Expense</ModalHeader>
-//       <ModalBody>
-//         <Form onSubmit={ExpUpdate}>
-//           {/* category dropdown list */}
-//           <Grid item xs={6}>
-//             <FormControl className={classes.formControl}>
-//               <InputLabel id="ddlExpCat">Category</InputLabel>
-//               <Select
-//                 labelId="ddlExpCat"
-//                 id="ddlExpCat"
-//                 value={category}
-//                 onChange={updateCategory}
-//                 required={true}
-//                 //   input={<BootstrapInput />}
-//               >
-//                 <MenuItem value="">
-//                   <em>None</em>
-//                 </MenuItem>
-//                 <MenuItem value={"Restaurant"}>Restaurant</MenuItem>
-//                 <MenuItem value={"Food"}>Food</MenuItem>
-//                 <MenuItem value={"Electric"}>Electric</MenuItem>
-//                 <MenuItem value={"Gas"}>Gas</MenuItem>
-//                 <MenuItem value={"Water"}>Water</MenuItem>
-//                 <MenuItem value={"Childcare"}>Childcare</MenuItem>
-//                 <MenuItem value={"Health"}>Health</MenuItem>
-//                 <MenuItem value={"Beauty"}>Beauty</MenuItem>
-//                 <MenuItem value={"Other"}>Other</MenuItem>
-//               </Select>
-//             </FormControl>
-//           </Grid>
-
-//           {/* vendor name input */}
-//           <Grid item xs={6}>
-//             <TextField
-//               id="txtName"
-//               label="Payee"
-//               variant="outlined"
-//               required={true}
-//               onChange={updateName}
-//             />
-//           </Grid>
-
-//           {/* amount input */}
-//           <Grid item xs={6}>
-//             <TextField
-//               id="txtAmount"
-//               label="Amount"
-//               variant="outlined"
-//               required={true}
-//               onChange={updateAmount}
-//             />
-//           </Grid>
-
-//           {/* due date - date picker field */}
-//           <Grid item xs={6}>
-//             <label htmlFor="dpDueDate">Due Date</label>
-//             <br />
-//             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-//               <KeyboardDatePicker
-//                 margin="normal"
-//                 id="dpDueDate"
-//                 // label="Due Date"
-//                 format="MM/dd/yyyy"
-//                 value={dueDate}
-//                 onChange={updateDueDate}
-//                 KeyboardButtonProps={{
-//                   "aria-label": "change date",
-//                 }}
-//               />
-//             </MuiPickersUtilsProvider>
-//           </Grid>
-
-//           {/* Recurring payment dropdown list  */}
-//           <Grid item xs={6}>
-//             <FormControl className={classes.formControl}>
-//               <InputLabel id="ddlExpRec">Frequency</InputLabel>
-//               <Select
-//                 labelId="ddlExpRec"
-//                 id="ddlExpRec"
-//                 value={reoccuring}
-//                 required={true}
-//                 onChange={updateReoccuring}
-//               >
-//                 <MenuItem value="">
-//                   <em>None</em>
-//                 </MenuItem>
-//                 <MenuItem value={true}>Recurring</MenuItem>
-//                 <MenuItem value={false}>Non-Recurring</MenuItem>
-//               </Select>
-//             </FormControl>
-//           </Grid>
-//           <Button type="submit">Update the Workout!</Button>
-//         </Form>
-//       </ModalBody>
-//     </Modal> 
-//     </div>
-//   );
-// };
-
-// export default ExpEdit;
+              {/* amount input */}
+              <TextField
+                id="txtAmount"
+                label="Payment Amount"
+                variant="standard"
+                onChange={updateAmount}
+                required="true"
+                value={editAmount}
+                // error={amountError}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  margin="normal"
+                  id="dpDueDate"
+                  format="MM/dd/yyyy"
+                  label="Due Date"
+                  helperText=""
+                  disablePast="true"
+                  // disableToolbar="true"
+                  value={editDueDate}
+                  onChange={updateDueDate}
+                  required="true"
+                  // error={dateError}
+                  KeyboardButtonProps={{
+                    "aria-label": "change date",
+                  }}
+                />
+              </MuiPickersUtilsProvider>
+            </Grid>
+          </Grid>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={ExpUpdate}>Edit</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+};
+export default ExpEdit;

@@ -6,17 +6,12 @@ import Auth from "./components/auth/Auth";
 import HomeNav from "./components/Navs/HomeNav";
 
 // import { PinDropSharp } from '@material-ui/icons';
-import ExpSplash from "./components/expenses/ExpSplash";
-import ButtonAppBar from "./components/Navs/LandingNav";
-import ButtonAppBarA from "./components/Navs/HomeNav";
 import ExpenseTable from "./components/ViewAll/ViewAll";
 import Landing from "./components/landing/Landing";
 import ExpAdd from "./components/expenses/ExpAdd";
 import Chart from "./components/chart/Chart";
 import ExpSearch from "./components/expenses/ExpSearch";
 // import Upcoming from "./components/upcoming/Upcoming";
-import PrimarySearchAppBar from "./components/Navs/HomeNav";
-// import ExpAdd from "./components/expenses/ExpAdd";
 import PageNotFound from "./components/PageNotFound";
 import Upcoming from "./components/upcoming/Upcoming";
 
@@ -71,6 +66,10 @@ const customTheme = createTheme({
         color: "#020202",
       },
     },
+
+    MuiTableRow: {
+      color: "#6ccff6",
+    },
   },
 });
 
@@ -89,7 +88,6 @@ function App() {
     console.log(sessionToken);
   };
 
-
   // const clearToken = () => {
   //   localStorage.clear();
   //   setSessionToken("");
@@ -97,28 +95,26 @@ function App() {
 
   return (
     <div>
-        <Router>
+      <Router>
         <ThemeProvider theme={customTheme}>
           <Switch>
             <Route exact path="/">
               <Auth updateToken={updateToken} />
             </Route>
 
-            <Route exact path="/ExpSplash">
-              {/* <ExpSplash token={sessionToken} /> */}
-              <ExpAdd token={sessionToken} />
-              {/* <ExpEdit token={sessionToken} /> */}
+            <Route exact path="/ExpAdd">
+              {/* <ExpAdd token={sessionToken} /> */}
               <ExpenseTable token={sessionToken} />
+              {/* <ExpEdit token={sessionToken} /> */}
               {/* <ExpSearch token={sessionToken} />
               <ExpDel token={sessionToken} /> */}
             </Route>
             <Route exact path="/HomeNav" component={HomeNav} />
             <Route exact path="*" component={PageNotFound} />
-          </Switch> 
+          </Switch>
         </ThemeProvider>
-    </Router>
-      </div>
-
+      </Router>
+    </div>
   );
 }
 

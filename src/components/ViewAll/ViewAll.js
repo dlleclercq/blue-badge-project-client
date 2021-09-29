@@ -217,7 +217,9 @@ export default function ExpenseTable(props) {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: "100%" }}> <ExpAdd token={props.token} getExpense={getExpense}/>
+    <Box sx={{ width: "100%" }}>
+      {" "}
+      <ExpAdd token={props.token} getExpense={getExpense} />
       <Paper sx={{ width: "100%", mb: 2 }}>
         <TableContainer>
           <Table
@@ -269,7 +271,7 @@ export default function ExpenseTable(props) {
                             <CheckBox color="primary" />
                           ))
                         }
-                      </TableCell >
+                      </TableCell>
                       <TableCell align="left" style={{ color: "#6ccff6" }}>
                         <ExpEdit
                           getExpense={getExpense}
@@ -278,12 +280,12 @@ export default function ExpenseTable(props) {
                         />
                       </TableCell>
                       <TableCell align="left" style={{ color: "#6ccff6" }}>
-                          <ExpDel 
-                            getExpense={getExpense}
-                            token={props.token}
-                            data={row}
-                          />
-                      </TableCell> 
+                        <ExpDel
+                          getExpense={getExpense}
+                          token={props.token}
+                          data={row}
+                        />
+                      </TableCell>
                     </TableRow>
                   );
                 })}

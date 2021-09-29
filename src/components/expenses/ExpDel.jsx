@@ -28,11 +28,11 @@ import DialogTitle from "@mui/material/DialogTitle";
 import APIURL from "../../helpers/enviornment";
 
 const ExpDel = (props) => {
-    // useEffect(() => {
+  // useEffect(() => {
   //   handleClickOpen();
   // }, [])
 
-  console.log(props.data)
+  console.log(props.data);
   const [open, setOpen] = React.useState(false);
 
   const deleteExpense = (expense) => {
@@ -55,21 +55,22 @@ const ExpDel = (props) => {
 
   return (
     <div>
-    <Button variant="outlined" onClick={handleClickOpen}>
-      Delete
-    </Button>
-    <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Subscribe</DialogTitle>
-      <DialogContent>
-        <DialogContentText>Are you sure you want to delete this item? </DialogContentText>
-        
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={deleteExpense}>Delete</Button>
-      </DialogActions>
-    </Dialog>
-  </div>  
+      <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
+        Delete
+      </Button>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Subscribe</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete this item?{" "}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={deleteExpense}>Delete</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
   );
 };
 

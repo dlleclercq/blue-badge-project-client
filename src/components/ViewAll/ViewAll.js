@@ -269,7 +269,7 @@ export default function ExpenseTable(props) {
                             <CheckBox color="primary" />
                           ))
                         }
-                      </TableCell>
+                      </TableCell >
                       <TableCell align="left" style={{ color: "#6ccff6" }}>
                         <ExpEdit
                           getExpense={getExpense}
@@ -277,9 +277,13 @@ export default function ExpenseTable(props) {
                           data={row}
                         />
                       </TableCell>
-                      <TableCell align="left">
-                        <Button color="secondary">Delete</Button>
-                      </TableCell>
+                      <TableCell align="left" style={{ color: "#6ccff6" }}>
+                          <ExpDel 
+                            getExpense={getExpense}
+                            token={props.token}
+                            data={row}
+                          />
+                      </TableCell> 
                     </TableRow>
                   );
                 })}

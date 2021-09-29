@@ -30,10 +30,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import APIURL from "../../helpers/enviornment";
 
 const ExpEdit = (props) => {
-  // useEffect(() => {
-  //   handleClickOpen();
-  // }, [])
-  console.log(props.data);
   const [open, setOpen] = React.useState(false);
 
   const [editCategory, setEditCategory] = useState(props.data.category);
@@ -80,7 +76,8 @@ const ExpEdit = (props) => {
       .then((res) => res.json())
       .then(() => {
         props.getExpense();
-      });
+      })
+      .then(handleClose()); 
   };
 
   const handleClickOpen = () => {

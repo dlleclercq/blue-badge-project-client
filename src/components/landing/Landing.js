@@ -50,10 +50,10 @@ const Landing = () => {
                 top: 225,
                 left: "50%",
                 transform: "translateX(-50%)",
-                opacity: 0.93,
-                padding: 10,
+                padding: 50,
                 fontWeight: "bold",
                 textAlign: "center",
+                height: "200px",
               }}
             >
               <h1>iSpend</h1>

@@ -34,6 +34,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import APIURL from "../../helpers/enviornment";
+import { Label } from "@mui/icons-material";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -132,11 +133,11 @@ const ExpAdd = (props) => {
     })
       .then((res) => res.json())
       .then(handleClickOpen);
-    setAmountError(false);
-    setNameError(false);
-    setDateError(false);
-    setReoccuringError(false);
-    setNameError(false);
+    // setAmountError(false);
+    // setNameError(false);
+    // setDateError(false);
+    // setReoccuringError(false);
+    // setNameError(false);
   };
   // Dialog box
   const [open, setOpen] = React.useState(false);
@@ -267,12 +268,13 @@ const ExpAdd = (props) => {
 
           <Grid item xs={2}>
             <Paper className={classes.paper}>
+              <Label> </Label>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
                   margin="dense"
                   id="dpDueDate"
                   format="MM/dd/yyyy"
-                  label="Due Date"
+                  label=""
                   helperText=""
                   disablePast="true"
                   // disableToolbar="true"
